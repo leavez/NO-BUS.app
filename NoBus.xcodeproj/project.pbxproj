@@ -13,6 +13,9 @@
 		3E4991572180C59100BFFBCB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E4991562180C59100BFFBCB /* Assets.xcassets */; };
 		3E49915A2180C59100BFFBCB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E4991582180C59100BFFBCB /* LaunchScreen.storyboard */; };
 		3E4991652180C59100BFFBCB /* NoBusTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4991642180C59100BFFBCB /* NoBusTests.swift */; };
+		3E4991732180CA1800BFFBCB /* Spot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4991722180CA1800BFFBCB /* Spot.swift */; };
+		B01468222D1F2EAEB987525B /* Pods_NoBus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D62448C90238E15EDC35344 /* Pods_NoBus.framework */; };
+		DCE94FB5B540FABDBE774A87 /* Pods_NoBusTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78A07FE0E3874402CD0C6914 /* Pods_NoBusTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +39,13 @@
 		3E4991602180C59100BFFBCB /* NoBusTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NoBusTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E4991642180C59100BFFBCB /* NoBusTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoBusTests.swift; sourceTree = "<group>"; };
 		3E4991662180C59100BFFBCB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3E4991722180CA1800BFFBCB /* Spot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spot.swift; sourceTree = "<group>"; };
+		4BB21AECB7F1C8F70BC8D593 /* Pods-NoBus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoBus.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NoBus/Pods-NoBus.debug.xcconfig"; sourceTree = "<group>"; };
+		50C3B2BAE3D04E92D819D8A1 /* Pods-NoBusTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoBusTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NoBusTests/Pods-NoBusTests.release.xcconfig"; sourceTree = "<group>"; };
+		5D62448C90238E15EDC35344 /* Pods_NoBus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoBus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		78A07FE0E3874402CD0C6914 /* Pods_NoBusTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoBusTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A54819C125C19FE8052303AF /* Pods-NoBus.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoBus.release.xcconfig"; path = "Pods/Target Support Files/Pods-NoBus/Pods-NoBus.release.xcconfig"; sourceTree = "<group>"; };
+		E3CE97F6CA4FBE8F7F197D27 /* Pods-NoBusTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoBusTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NoBusTests/Pods-NoBusTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +53,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B01468222D1F2EAEB987525B /* Pods_NoBus.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -50,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCE94FB5B540FABDBE774A87 /* Pods_NoBusTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,6 +74,8 @@
 				3E49914E2180C58F00BFFBCB /* NoBus */,
 				3E4991632180C59100BFFBCB /* NoBusTests */,
 				3E49914D2180C58F00BFFBCB /* Products */,
+				96B86F7AB44327F57E62B5B3 /* Pods */,
+				E39933FC77A02C152D4E9054 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -77,6 +91,7 @@
 		3E49914E2180C58F00BFFBCB /* NoBus */ = {
 			isa = PBXGroup;
 			children = (
+				3E49916F2180C9DC00BFFBCB /* Model */,
 				3E49914F2180C58F00BFFBCB /* AppDelegate.swift */,
 				3E4991512180C58F00BFFBCB /* ViewController.swift */,
 				3E4991532180C58F00BFFBCB /* Main.storyboard */,
@@ -96,6 +111,34 @@
 			path = NoBusTests;
 			sourceTree = "<group>";
 		};
+		3E49916F2180C9DC00BFFBCB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3E4991722180CA1800BFFBCB /* Spot.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		96B86F7AB44327F57E62B5B3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4BB21AECB7F1C8F70BC8D593 /* Pods-NoBus.debug.xcconfig */,
+				A54819C125C19FE8052303AF /* Pods-NoBus.release.xcconfig */,
+				E3CE97F6CA4FBE8F7F197D27 /* Pods-NoBusTests.debug.xcconfig */,
+				50C3B2BAE3D04E92D819D8A1 /* Pods-NoBusTests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		E39933FC77A02C152D4E9054 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5D62448C90238E15EDC35344 /* Pods_NoBus.framework */,
+				78A07FE0E3874402CD0C6914 /* Pods_NoBusTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -103,9 +146,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3E4991692180C59100BFFBCB /* Build configuration list for PBXNativeTarget "NoBus" */;
 			buildPhases = (
+				E464C60B9C57693A5CA4251B /* [CP] Check Pods Manifest.lock */,
 				3E4991482180C58F00BFFBCB /* Sources */,
 				3E4991492180C58F00BFFBCB /* Frameworks */,
 				3E49914A2180C58F00BFFBCB /* Resources */,
+				D49EEA8A0A3C65357DC0303C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -120,6 +165,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3E49916C2180C59100BFFBCB /* Build configuration list for PBXNativeTarget "NoBusTests" */;
 			buildPhases = (
+				193A6642B0C11CAF6DBE645D /* [CP] Check Pods Manifest.lock */,
 				3E49915C2180C59100BFFBCB /* Sources */,
 				3E49915D2180C59100BFFBCB /* Frameworks */,
 				3E49915E2180C59100BFFBCB /* Resources */,
@@ -192,12 +238,74 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		193A6642B0C11CAF6DBE645D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NoBusTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D49EEA8A0A3C65357DC0303C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-NoBus/Pods-NoBus-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Mappable/Mappable.framework",
+				"${BUILT_PRODUCTS_DIR}/fucking-beijing-bus-api/fucking_beijing_bus_api.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mappable.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/fucking_beijing_bus_api.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NoBus/Pods-NoBus-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E464C60B9C57693A5CA4251B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-NoBus-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		3E4991482180C58F00BFFBCB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				3E4991522180C58F00BFFBCB /* ViewController.swift in Sources */,
+				3E4991732180CA1800BFFBCB /* Spot.swift in Sources */,
 				3E4991502180C58F00BFFBCB /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -358,6 +466,7 @@
 		};
 		3E49916A2180C59100BFFBCB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4BB21AECB7F1C8F70BC8D593 /* Pods-NoBus.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -375,6 +484,7 @@
 		};
 		3E49916B2180C59100BFFBCB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A54819C125C19FE8052303AF /* Pods-NoBus.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -392,6 +502,7 @@
 		};
 		3E49916D2180C59100BFFBCB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E3CE97F6CA4FBE8F7F197D27 /* Pods-NoBusTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -412,6 +523,7 @@
 		};
 		3E49916E2180C59100BFFBCB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 50C3B2BAE3D04E92D819D8A1 /* Pods-NoBusTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
