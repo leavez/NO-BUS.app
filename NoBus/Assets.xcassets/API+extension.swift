@@ -23,6 +23,6 @@ extension LineDetail.Station : CustomDebugStringConvertible {
 
 extension Coordinate: CustomDebugStringConvertible {
     public var debugDescription: String {
-        return String(format: "(%@, %@)", latitude,longitude)
+        return String(format: "(%f, %f)", latitude,longitude)
     }
 }
