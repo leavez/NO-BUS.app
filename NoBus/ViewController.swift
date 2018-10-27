@@ -8,6 +8,7 @@
 
 import UIKit
 import fucking_beijing_bus_api
+import Alamofire
 
 class ViewController: UIViewController {
 
@@ -27,41 +28,31 @@ class ViewController: UIViewController {
         textView.text = "loading"
         SpotsManager.shared.getAllSpot { (spots) in
             
-            for spot in spots {
-                let stations = spot.stations.map({ (gs) -> [Station] in
-                    gs.stationsInLines
-                }).joined()
-                
-                let parameters = stations.map({ s in
-                    (s.belongedToLine.ID, s.name, s.apiObject.index)
-                })
-                
-                func transName(from lineID:String) -> String {
-                    return stations.first(where: { $0.belongedToLine.ID == lineID })?.name ?? "lineID"+lineID
-                }
-                
-                BeijingBusAPI.RealTime.getLineStatusForStation(parameters, completion: {[weak self] (result) in
-                    var text = "\(result)\n"
-                    text += "\n\n"
-                    if let value = result.value {
-                        text += value.map { (info) -> String in
-                            let name = info.lineID.map(transName(from:))
-                            let d = info.distanceRemain
-                            let t = info.estimatedRunDuration
-                            let updated = Date(timeIntervalSince1970:  info.gpsUpdatedTime)
-                            return String(format: "%@: %dm %.2fmins, %@", name ?? "", d, t/60, "\(updated)")
-                        }.joined(separator: "\n")
+//            func transName(from lineID:String) -> String {
+//                return stations.first(where: { $0.belongedToLine.ID == lineID })?.name ?? "lineID"+lineID
+//            }
+            
+            DataFetcher.getStatus(for: spots) {[weak self]
+                (result: Result<[String:BusStatusForStation]>) -> () in
+                var text = ""
+                if let statusMap = result.value {
+                    text += statusMap.map({ (id, status) -> String in
+                        let name = id
+                        let d = status.distanceRemain
+                        let t = status.estimatedRunDuration
+                        let updated = Date(timeIntervalSince1970:  status.gpsUpdatedTime)
+                        return String(format: "%@: %dm %.2fmins, %@", name, d, t/60, "\(updated)")
                         
-                        text += "\n\n"
-                        text += "\(value)\n"
-                    }
-                    self?.textView.text = text
-                })
+                    }).joined(separator: "\n")
+                }
+                text += "\n\n"
+                text += "\n\(result.debugDescription)"
+
+                self?.textView.text = text
             }
             
         }
     }
-
 
 }
 
