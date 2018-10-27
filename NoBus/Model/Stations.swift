@@ -9,7 +9,7 @@
 import Foundation
 import fucking_beijing_bus_api
 
-
+// another representation of LineDetail.Station
 struct Station {
     var name: String {
         return apiObject.name

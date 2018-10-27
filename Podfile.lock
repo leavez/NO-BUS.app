@@ -4,14 +4,20 @@ PODS:
     - Alamofire
     - Mappable
   - Mappable (1.3.1)
+  - RxCocoa (4.3.1):
+    - RxSwift (~> 4.0)
+  - RxSwift (4.3.1)
 
 DEPENDENCIES:
   - fucking-beijing-bus-api (from `https://github.com/leavez/fucking-beijing-bus-api.git`, tag `1.0.4`)
+  - RxCocoa
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - Mappable
+    - RxCocoa
+    - RxSwift
 
 EXTERNAL SOURCES:
   fucking-beijing-bus-api:
@@ -27,7 +33,9 @@ SPEC CHECKSUMS:
   Alamofire: c7287b6e5d7da964a70935e5db17046b7fde6568
   fucking-beijing-bus-api: bb4f1d2e5f5d9bb2bc7c776b19b8c89ffac31cb0
   Mappable: b623c512eac5f2bbba7968117fbf9550991f8e7c
+  RxCocoa: 78763c7b07d02455598d9fc3c1ad091a28b73635
+  RxSwift: fe0fd770a43acdb7d0a53da411c9b892e69bb6e4
 
-PODFILE CHECKSUM: 59e8237d57313b15ff37117dfb81906871cb954e
+PODFILE CHECKSUM: 3b0c4ed42c843466fafa6ca5829ffd81f124c8e4
 
 COCOAPODS: 1.5.3
