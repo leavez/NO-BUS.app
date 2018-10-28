@@ -6,6 +6,8 @@ target 'NoBus' do
   use_frameworks!
   pod "fucking-beijing-bus-api", :git => "https://github.com/leavez/fucking-beijing-bus-api.git", :tag => "1.0.4"
   pod 'RxCocoa'
+  pod 'RxDataSources'
+  pod 'SteviaLayout'
   
   target 'NoBusTests' do
     inherit! :search_paths

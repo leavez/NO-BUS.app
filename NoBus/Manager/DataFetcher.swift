@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import fucking_beijing_bus_api
-import Alamofire
+@_exported import fucking_beijing_bus_api
+@_exported import Alamofire
 
 struct DataFetcher {
     
