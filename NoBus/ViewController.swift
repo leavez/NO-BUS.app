@@ -44,9 +44,8 @@ class ViewController: UIViewController {
         let dataSource = RxCollectionViewSectionedReloadDataSource<DisplayModel.Group> (configureCell: {
                 (datasource, collectionView, index, i) -> UICollectionViewCell in
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: index) as? StationCardCell
-                cell?.backgroundColor = .orange
                 cell?.stataionNameLabel.text = i.name
-                cell?.contentLabel.text = i.lines.map { $0.name }.joined(separator: "\n")
+                cell?.setViewModelData(i)
                 return cell ?? UICollectionViewCell()
             })
         

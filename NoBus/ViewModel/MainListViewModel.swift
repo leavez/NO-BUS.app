@@ -11,19 +11,20 @@ import RxSwift
 import RxDataSources
 import Alamofire
 
-class DisplayModel {
+
+struct DisplayModel {
     
-    class Line {
+    final class Line {
         var name = ""
         var distanceRemain: Int = 0
     }
     
-    class Station {
+    final class Station {
         var name: String = ""
         var lines: [DisplayModel.Line] = []
     }
     
-    class Group: SectionModelType {
+    final class Group: SectionModelType {
         
         
         typealias Item = DisplayModel.Station
@@ -42,6 +43,10 @@ class DisplayModel {
     }
 }
 
+
+extension DisplayModel.Line: Codable {}
+extension DisplayModel.Station: Codable {}
+extension DisplayModel.Group: Codable {}
 
 
 
