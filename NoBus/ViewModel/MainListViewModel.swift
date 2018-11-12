@@ -8,86 +8,43 @@
 
 import Foundation
 import RxSwift
-import RxDataSources
 import Alamofire
-
-
-struct DisplayModel {
-    
-    final class Line {
-        var name = ""
-        var distanceRemain: Int = 0
-    }
-    
-    final class Station {
-        var name: String = ""
-        var lines: [DisplayModel.Line] = []
-    }
-    
-    final class Group: SectionModelType {
-        
-        
-        typealias Item = DisplayModel.Station
-        var title: String = ""
-        var stations: [Item] = []
-        
-        // --- SectionModelType ---
-        var items: [Item] {
-            return self.stations
-        }
-        required convenience init(original: DisplayModel.Group, items: [Item]) {
-            self.init()
-            self.title = original.title
-            self.stations = items
-        }
-    }
-}
-
-
-extension DisplayModel.Line: Codable {}
-extension DisplayModel.Station: Codable {}
-extension DisplayModel.Group: Codable {}
-
-
 
 
 class MainListViewModel {
     
-    let items = Variable<[DisplayModel.Group]>([])
-    private let bag = DisposeBag()
+    public let items = Variable<[ItemViewModel.Section]>([])
     
     init() {
         loadData()
             .map(render)
+            .catchErrorJustReturn([])
             .bind(to: items)
             .disposed(by: bag)
     }
     
     
     func render(data: (spots:[Spot], map:[String:BusStatusForStation]))
-        -> [DisplayModel.Group] {
+        -> [ItemViewModel.Section] {
 
-        return data.spots.map { (spot) -> DisplayModel.Group in
+        return data.spots.map { (spot) -> ItemViewModel.Section in
             
-            let group = DisplayModel.Group()
+            var group = ItemViewModel.Section()
             group.stations = spot.stations.map({ (generalStation:GeneralStation) ->
-                DisplayModel.Station in
+                ItemViewModel.StationCell in
                 
-                let s = DisplayModel.Station()
-                s.name = generalStation.name
-                s.lines = generalStation.stationsInLines.compactMap({
-                    (lineStaion:Station) -> DisplayModel.Line? in
+                let lines = generalStation.stationsInLines.compactMap({
+                    (lineStaion:Station) -> ItemViewModel.StationCell.Line? in
                     
                     let id = lineStaion.belongedToLine.ID
                     guard let status = data.map[id] else {
                         return nil
                     }
                     // transfrom status to visiable texts
-                    let line = DisplayModel.Line()
-                    line.name = lineStaion.belongedToLine.busNumber
-                    line.distanceRemain = status.distanceRemain
-                    return line
+                    return ItemViewModel.StationCell.Line(lineNumber: lineStaion.belongedToLine.busNumber, status: status)
                 })
+                
+                let s = ItemViewModel.StationCell(stationName: generalStation.name, lines: lines)
                 return s
             })
             return group
@@ -114,22 +71,8 @@ class MainListViewModel {
         }
     }
     
-    
-//            var text = ""
-//            if let statusMap = result.value {
-//                text += statusMap.map({ (id, status) -> String in
-//                    let name = id
-//                    let d = status.distanceRemain
-//                    let t = status.estimatedRunDuration
-//                    let updated = Date(timeIntervalSince1970:  status.gpsUpdatedTime)
-//                    return String(format: "%@: %dm %.2fmins, %@", name, d, t/60, "\(updated)")
-//
-//                }).joined(separator: "\n")
-//            }
-//            text += "\n\n"
-//            text += "\n\(result.debugDescription)"
-//        textView.text = "loading"
-    
+    private let bag = DisposeBag()
+
 }
 
 

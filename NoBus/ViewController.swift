@@ -26,26 +26,27 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.sectionInset = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
-        layout.estimatedItemSize = CGSize(width: 100, height: 100)
-        collectionView.backgroundColor = UIColor.white
-        collectionView.register(StationCardCell.self, forCellWithReuseIdentifier: "cell")
         view.sv(collectionView)
         view.layout(
             0,
             |collectionView|,
             0
         )
+        collectionView.style { (collectionView) in
+            collectionView.register(StationCardCell.self, forCellWithReuseIdentifier: "cell")
+            let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+            layout.sectionInset = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
+            layout.estimatedItemSize = CGSize(width: 100, height: 100)
+            collectionView.backgroundColor = UIColor.white
+            collectionView.alwaysBounceVertical = true
+        }
         
 
         
-        
-        let dataSource = RxCollectionViewSectionedReloadDataSource<DisplayModel.Group> (configureCell: {
+        let dataSource = RxCollectionViewSectionedReloadDataSource<ItemViewModel.Section> (configureCell: {
                 (datasource, collectionView, index, i) -> UICollectionViewCell in
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: index) as? StationCardCell
-                cell?.stataionNameLabel.text = i.name
-                cell?.setViewModelData(i)
+                cell?.bind(viewModel: i)
                 return cell ?? UICollectionViewCell()
             })
         

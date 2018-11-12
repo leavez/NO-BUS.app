@@ -8,6 +8,8 @@
 
 import UIKit
 import Stevia
+import RxSwift
+import RxCocoa
 
 class StationCardCell: UICollectionViewCell {
     
@@ -28,10 +30,13 @@ class StationCardCell: UICollectionViewCell {
             |-10-itemsView-10-|,
             30
         )
+        NSLayoutConstraint.activate([
+            contentView.widthAnchor.constraint(greaterThanOrEqualToConstant: 280),
+            contentView.widthAnchor.constraint(lessThanOrEqualToConstant: 320)
+            ])
+        
         
         self.style {
-//            $0.layer.borderWidth = 0.5
-//            $0.layer.borderColor = UIColor.darkGray.cgColor
             $0.backgroundColor = .white
             $0.layer.shadowRadius = 20
             $0.layer.shadowColor = UIColor.darkGray.cgColor
@@ -40,8 +45,8 @@ class StationCardCell: UICollectionViewCell {
         }
         
         stataionNameLabel.style {
-            $0.font = UIFont.boldSystemFont(ofSize: 25)
-            $0.textColor = UIColor(white: 0.2, alpha: 1)
+            $0.font = UIFont.preferredFont(forTextStyle: .largeTitle)
+            $0.textColor = UIColor(white: 0.5, alpha: 1)
         }
         itemsView.style {
             $0.spacing = 10
@@ -55,16 +60,33 @@ class StationCardCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setViewModelData(_ data:DisplayModel.Station) {
-        let lineViews = data.lines.map { (line) -> UIView in
-            let v = LineItemView()
-            v.setUp(data: line)
-            return v
-        }
-        lineViews.forEach { (v) in
-            self.itemsView.addArrangedSubview(v)
-        }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        reuseDisposeBag = DisposeBag()
     }
+    
+    func bind(viewModel: ItemViewModel.StationCell) {
+        
+        stataionNameLabel.text = viewModel.name
+        viewModel.lines.bind { (data) in
+            // remove old
+            self.itemsView.arrangedSubviews
+                .forEach(self.itemsView.removeArrangedSubview(_:))
+            
+            // add new
+            let lineViews = data.map { (line) -> UIView in
+                let v = LineItemView()
+                v.bind(viewModel: line)
+                return v
+            }
+            lineViews.forEach { (v) in
+                self.itemsView.addArrangedSubview(v)
+            }
+        }.disposed(by: reuseDisposeBag)
+        
+    }
+    
+    private(set) var reuseDisposeBag = DisposeBag()
 }
 
 
@@ -77,38 +99,81 @@ class LineItemView: UIView {
     let remainTimeLabel = UILabel()
     let updatedTimeLabel = UILabel()
     
+    let highlightedView = UIView()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
         self.sv(
+            highlightedView,
             lineNumberLabel,
             remainDistanceLabel,
-            remainTimeLabel
+            remainTimeLabel,
+            updatedTimeLabel
         )
         
-        self.layout(
-            |-10-lineNumberLabel-10-remainDistanceLabel-|
-        )
+        lineNumberLabel.Top == self.Top
+        lineNumberLabel.Bottom == self.Bottom
+        lineNumberLabel.Left == self.Left + 10
+        
+        remainDistanceLabel.Right == self.Right - 10
+        remainDistanceLabel.Top == self.Top + 10
+        
+        remainTimeLabel.Right == remainDistanceLabel.Left - 10
+        remainTimeLabel.CenterY == remainDistanceLabel.CenterY
+        remainTimeLabel.Left >= lineNumberLabel.Right + 20
+        
+        updatedTimeLabel.Top >= remainDistanceLabel.Bottom + 6
+        updatedTimeLabel.Right == remainDistanceLabel.Right
+        updatedTimeLabel.Bottom == self.Bottom - 10
+        
+        highlightedView.followEdges(self)
+        highlightedView.backgroundColor = UIColor(red: 0.1, green: 1, blue: 0.1, alpha: 0.1)
+        highlightedView.isHidden = true
+        
+
+        
         
         self.style {
-            $0.layer.shadowRadius = 5
+            $0.layer.shadowRadius = 2
             $0.layer.shadowColor = UIColor.darkGray.cgColor
-            $0.layer.shadowOpacity = 0.1
-            $0.layer.shadowOffset = CGSize(width: 0, height: 2)
+            $0.layer.shadowOpacity = 0.2
+            $0.layer.shadowOffset = CGSize(width: 0.3, height: 1)
             $0.layer.cornerRadius = LineItemView.cornerRaius
-//            $0.layer.borderColor = UIColor(white: 0.9, alpha: 1).cgColor
-//            $0.layer.borderWidth = 0.5
+            
+            $0.highlightedView.layer.cornerRadius = $0.layer.cornerRadius
+            
+            $0.lineNumberLabel.style({
+                $0.font = UIFont.preferredFont(forTextStyle: .headline)
+                $0.textColor = UIColor(white: 0.2, alpha: 1)
+            })
+            for label in [$0.remainDistanceLabel, $0.remainTimeLabel] {
+                label.font = .preferredFont(forTextStyle: UIFont.TextStyle.subheadline)
+                label.textColor = UIColor(white: 0.5, alpha: 1)
+            }
+            $0.updatedTimeLabel.style({ (l) in
+                l.font = .preferredFont(forTextStyle: UIFont.TextStyle.footnote)
+                l.textColor = UIColor(white: 0.5, alpha: 1)
+            })
         }
+        
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    override var intrinsicContentSize: CGSize {
-        return CGSize(width: 300, height: 60)
+    
+    func bind(viewModel: ItemViewModel.StationCell.Line) {
+        for t in [
+            (\ItemViewModel.StationCell.Line.title, lineNumberLabel),
+            (\.distanceRemain, remainDistanceLabel),
+            (\.timeRemain, remainTimeLabel),
+            (\.updatedTime, updatedTimeLabel)
+            ]
+        {
+            viewModel[keyPath:t.0].bind(to: t.1.rx.text)
+                .disposed(by: bag)
+        }
     }
     
-    func setUp(data: DisplayModel.Line) {
-        lineNumberLabel.text = data.name
-        remainTimeLabel.text = "\(Double(data.distanceRemain) / 60.0) mins"
-    }
+    private let bag = DisposeBag()
 }
