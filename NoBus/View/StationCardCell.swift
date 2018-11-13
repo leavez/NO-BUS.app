@@ -37,11 +37,13 @@ class StationCardCell: UICollectionViewCell {
         
         
         self.style {
+            $0.layer.borderWidth = 0.5
+            $0.layer.borderColor = UIColor(white: 0.8, alpha: 0.3).cgColor
             $0.backgroundColor = .white
-            $0.layer.shadowRadius = 20
+            $0.layer.shadowRadius = 15
             $0.layer.shadowColor = UIColor.darkGray.cgColor
             $0.layer.shadowOpacity = 0.2
-            $0.layer.shadowOffset = CGSize(width: 0, height: 2)
+            $0.layer.shadowOffset = CGSize(width: 0, height: 4)
         }
         
         stataionNameLabel.style {

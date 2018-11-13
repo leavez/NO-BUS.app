@@ -10,11 +10,11 @@ import Foundation
 
 extension Date {
     var readableDescriptionToNow: String {
-        let seconds = self.timeIntervalSinceNow
+        let seconds = -self.timeIntervalSinceNow // self is furture 
         if seconds < 1.minute {
-            return "\(seconds)\u{2009}秒"
+            return String(format:"%.0f\u{2009}秒", seconds)
         } else {
-            return String(format: "%.1f\u{2009}分", seconds/1.minute)
+            return String(format: "%.1f\u{2009}分钟", seconds/1.minute)
         }
     }
 }
