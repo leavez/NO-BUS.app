@@ -16,7 +16,7 @@ import RxDataSources
 
 
 
-class ViewController: UIViewController {
+class CardListViewController: UIViewController {
 
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     

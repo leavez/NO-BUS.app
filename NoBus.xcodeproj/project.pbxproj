@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3E4991502180C58F00BFFBCB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E49914F2180C58F00BFFBCB /* AppDelegate.swift */; };
-		3E4991522180C58F00BFFBCB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4991512180C58F00BFFBCB /* ViewController.swift */; };
+		3E4991522180C58F00BFFBCB /* CardListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4991512180C58F00BFFBCB /* CardListViewController.swift */; };
 		3E4991552180C58F00BFFBCB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E4991532180C58F00BFFBCB /* Main.storyboard */; };
 		3E4991572180C59100BFFBCB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E4991562180C59100BFFBCB /* Assets.xcassets */; };
 		3E49915A2180C59100BFFBCB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E4991582180C59100BFFBCB /* LaunchScreen.storyboard */; };
@@ -40,7 +40,7 @@
 /* Begin PBXFileReference section */
 		3E49914C2180C58F00BFFBCB /* NoBus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoBus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E49914F2180C58F00BFFBCB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3E4991512180C58F00BFFBCB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		3E4991512180C58F00BFFBCB /* CardListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListViewController.swift; sourceTree = "<group>"; };
 		3E4991542180C58F00BFFBCB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3E4991562180C59100BFFBCB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3E4991592180C59100BFFBCB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -109,14 +109,11 @@
 		3E49914E2180C58F00BFFBCB /* NoBus */ = {
 			isa = PBXGroup;
 			children = (
-				3ECAAD0D2199EE3200FD6362 /* Utility */,
-				3E7E65422185669F00997D9F /* View */,
-				3E4991852184C54D00BFFBCB /* ViewModel */,
-				3E49917D2180E82F00BFFBCB /* etc */,
-				3E49916F2180C9DC00BFFBCB /* Model */,
 				3E49914F2180C58F00BFFBCB /* AppDelegate.swift */,
+				3ECAAD13219B2C5E00FD6362 /* Modules */,
+				3E49916F2180C9DC00BFFBCB /* Model */,
 				3E4991842182361D00BFFBCB /* Manager */,
-				3E4991512180C58F00BFFBCB /* ViewController.swift */,
+				3E49917D2180E82F00BFFBCB /* Others */,
 				3E4991532180C58F00BFFBCB /* Main.storyboard */,
 				3E4991562180C59100BFFBCB /* Assets.xcassets */,
 				3E4991582180C59100BFFBCB /* LaunchScreen.storyboard */,
@@ -143,12 +140,13 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		3E49917D2180E82F00BFFBCB /* etc */ = {
+		3E49917D2180E82F00BFFBCB /* Others */ = {
 			isa = PBXGroup;
 			children = (
+				3ECAAD0D2199EE3200FD6362 /* Utility */,
 				3E49917E2180E84100BFFBCB /* API+extension.swift */,
 			);
-			path = etc;
+			path = Others;
 			sourceTree = "<group>";
 		};
 		3E4991842182361D00BFFBCB /* Manager */ = {
@@ -160,23 +158,6 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
-		3E4991852184C54D00BFFBCB /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				3E4991862184C56800BFFBCB /* MainListViewModel.swift */,
-				3ECAAD0B2199D90100FD6362 /* ItemViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
-		3E7E65422185669F00997D9F /* View */ = {
-			isa = PBXGroup;
-			children = (
-				3E7E6543218566BA00997D9F /* StationCardCell.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		3ECAAD0D2199EE3200FD6362 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +165,25 @@
 				3ECAAD102199EF7200FD6362 /* Date+extension.swift */,
 			);
 			path = Utility;
+			sourceTree = "<group>";
+		};
+		3ECAAD13219B2C5E00FD6362 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				3ECAAD14219B2C6D00FD6362 /* CardList */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		3ECAAD14219B2C6D00FD6362 /* CardList */ = {
+			isa = PBXGroup;
+			children = (
+				3E4991512180C58F00BFFBCB /* CardListViewController.swift */,
+				3E4991862184C56800BFFBCB /* MainListViewModel.swift */,
+				3ECAAD0B2199D90100FD6362 /* ItemViewModel.swift */,
+				3E7E6543218566BA00997D9F /* StationCardCell.swift */,
+			);
+			path = CardList;
 			sourceTree = "<group>";
 		};
 		96B86F7AB44327F57E62B5B3 /* Pods */ = {
@@ -384,7 +384,7 @@
 				3E49917F2180E84100BFFBCB /* API+extension.swift in Sources */,
 				3ECAAD0C2199D90100FD6362 /* ItemViewModel.swift in Sources */,
 				3ECAAD0F2199EE4700FD6362 /* Time.swift in Sources */,
-				3E4991522180C58F00BFFBCB /* ViewController.swift in Sources */,
+				3E4991522180C58F00BFFBCB /* CardListViewController.swift in Sources */,
 				3E49917A2180D2FF00BFFBCB /* SpotsManager.swift in Sources */,
 				3E4991872184C56800BFFBCB /* MainListViewModel.swift in Sources */,
 				3E7E6544218566BA00997D9F /* StationCardCell.swift in Sources */,
