@@ -39,14 +39,22 @@ struct ItemViewModel {
                     return "\(s)\u{2009}前更新"
                     }())
             }
+            
+            init() {}
         }
         
         let name: String
-        let lines = BehaviorSubject<[Line]>(value: [])
+        let lines: BehaviorSubject<[Line]>
         
         init(stationName:String, lines:[Line]) {
             name = stationName
-            self.lines.onNext(lines)
+            if lines.count > 0 {
+                self.lines = BehaviorSubject(value: lines)
+            } else {
+                let placeholder = Line()
+                placeholder.updatedTime.onNext("暂无数据")
+                self.lines = BehaviorSubject(value: [placeholder])
+            }
         }
         
     }
