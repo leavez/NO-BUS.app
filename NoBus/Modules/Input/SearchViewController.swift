@@ -114,7 +114,7 @@ class SearchField: UIView {
         super.init(frame: frame)
         sv(realField)
         realField.fillContainer(20)
-        realField.placeholder = "例如：西直门 321"
+        realField.placeholder = "例如：321 学院路 xueyuanlu"
         realField.clearButtonMode = .unlessEditing
         
         self.style {

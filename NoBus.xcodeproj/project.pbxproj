@@ -29,6 +29,7 @@
 		3ECAAD1D219B2E3A00FD6362 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECAAD1C219B2E3A00FD6362 /* SearchViewModel.swift */; };
 		3ECAAD1F219B313A00FD6362 /* MarginHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECAAD1E219B313A00FD6362 /* MarginHelper.swift */; };
 		3ECAAD21219B3B3600FD6362 /* StationSearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECAAD20219B3B3600FD6362 /* StationSearchManager.swift */; };
+		4131F496219C5184000D5455 /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4131F495219C5184000D5455 /* String+extension.swift */; };
 		B01468222D1F2EAEB987525B /* Pods_NoBus.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5D62448C90238E15EDC35344 /* Pods_NoBus.framework */; };
 		DCE94FB5B540FABDBE774A87 /* Pods_NoBusTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78A07FE0E3874402CD0C6914 /* Pods_NoBusTests.framework */; };
 /* End PBXBuildFile section */
@@ -70,6 +71,7 @@
 		3ECAAD1C219B2E3A00FD6362 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		3ECAAD1E219B313A00FD6362 /* MarginHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarginHelper.swift; sourceTree = "<group>"; };
 		3ECAAD20219B3B3600FD6362 /* StationSearchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchManager.swift; sourceTree = "<group>"; };
+		4131F495219C5184000D5455 /* String+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
 		4BB21AECB7F1C8F70BC8D593 /* Pods-NoBus.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoBus.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NoBus/Pods-NoBus.debug.xcconfig"; sourceTree = "<group>"; };
 		50C3B2BAE3D04E92D819D8A1 /* Pods-NoBusTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NoBusTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-NoBusTests/Pods-NoBusTests.release.xcconfig"; sourceTree = "<group>"; };
 		5D62448C90238E15EDC35344 /* Pods_NoBus.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NoBus.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -177,6 +179,7 @@
 			children = (
 				3ECAAD0E2199EE4700FD6362 /* Time.swift */,
 				3ECAAD102199EF7200FD6362 /* Date+extension.swift */,
+				4131F495219C5184000D5455 /* String+extension.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -415,6 +418,7 @@
 				3E4991522180C58F00BFFBCB /* CardListViewController.swift in Sources */,
 				3ECAAD1D219B2E3A00FD6362 /* SearchViewModel.swift in Sources */,
 				3E49917A2180D2FF00BFFBCB /* SpotsManager.swift in Sources */,
+				4131F496219C5184000D5455 /* String+extension.swift in Sources */,
 				3E4991872184C56800BFFBCB /* MainListViewModel.swift in Sources */,
 				3ECAAD1B219B2E2D00FD6362 /* SearchViewController.swift in Sources */,
 				3E7E6544218566BA00997D9F /* StationCardCell.swift in Sources */,
