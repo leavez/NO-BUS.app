@@ -26,17 +26,21 @@ struct ItemViewModel {
             init(lineNumber:String, status:BusStatusForStation) {
                 title.onNext(lineNumber)
                 distanceRemain.onNext({
-                    "\(status.distanceRemain)\u{2009}米"
+                    if status.distanceRemain > 1000 {
+                        return String(format: "%0.1f\u{2009}千米", Double(status.distanceRemain)/1000.0)
+                    } else {
+                        return "\(status.distanceRemain)\u{2009}米"
+                    }
                     }())
                 timeRemain.onNext({
                     let s = Date(timeIntervalSince1970: status.estimatedArrivedTime)
-                        .readableDescriptionToNow
+                        .furtureDurationDescription
                     return "预计\u{2009}\(s)"
                     }())
                 updatedTime.onNext({
                     let s = Date(timeIntervalSince1970: status.gpsUpdatedTime)
-                        .readableDescriptionToNow
-                    return "\(s)\u{2009}前更新"
+                        .pastDurationDescription
+                    return "\(s)前更新"
                     }())
             }
             
