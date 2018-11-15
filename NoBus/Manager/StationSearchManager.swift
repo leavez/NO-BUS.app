@@ -118,8 +118,8 @@ private func isFuzzyMatchName(_ target:String, _ input:String?) -> Bool  {
         return new
     }
     // pinyin    
-    let latinInput = tranformToPinyin(input)
-    let latinTarget = tranformToPinyin(target)
+    let latinInput = tranformToPinyin(input).lowercased()
+    let latinTarget = tranformToPinyin(target).lowercased()
     return latinTarget.contains(latinInput) || latinInput.contains(latinTarget)
 }
 

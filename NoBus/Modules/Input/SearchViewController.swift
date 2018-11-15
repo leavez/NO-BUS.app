@@ -63,7 +63,8 @@ class SearchViewController: UIViewController {
         }
         
         noResultHintView.style { (v) in
-            v.text = "没有找到"
+            v.numberOfLines = 5
+            v.textAlignment = .center
             v.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title2)
             v.textColor = UIColor(white: 0.5, alpha: 1)
         }
@@ -93,9 +94,12 @@ class SearchViewController: UIViewController {
             searchCell.bind(data: data)
         }.disposed(by: bag)
         
-        let showNoResult = viewModel.output.showNoResultHint.share()
-        showNoResult.map{ !$0 }.bind(to: noResultHintView.rx.isHidden).disposed(by: bag)
-        showNoResult.bind(to: tableView.rx.isHidden).disposed(by: bag)
+        let showNoResult = viewModel.output.showHint.share()
+        bag.insert(
+            showNoResult.map{ !$0 }.bind(to: noResultHintView.rx.isHidden),
+            showNoResult.bind(to: tableView.rx.isHidden),
+            viewModel.output.hint.bind(to: noResultHintView.rx.text)
+        )
     }
     
     private let bag = DisposeBag()
