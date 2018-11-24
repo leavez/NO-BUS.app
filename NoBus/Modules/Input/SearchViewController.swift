@@ -17,6 +17,7 @@ class SearchViewController: UIViewController {
     let inputField = SearchField()
     let tableView = UITableView()
     let noResultHintView = UILabel()
+    let closeButton = BigCloseButton()
     
     let viewModel = SearchViewModel()
     
@@ -29,14 +30,21 @@ class SearchViewController: UIViewController {
         view.backgroundColor = .white
 
         view.sv(
+            closeButton,
             tableView,
             inputField,
             noResultHintView
         )
         
         let margin = MarginHelper.margin(for: self)
+        
         NSLayoutConstraint.activate([
-            inputField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant:30),
+            closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant:10),
+            closeButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -margin),
+            ])
+        
+        NSLayoutConstraint.activate([
+            inputField.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant:15),
             inputField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: margin),
             inputField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -margin)
             ])
@@ -54,6 +62,7 @@ class SearchViewController: UIViewController {
             noResultHintView.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, multiplier: 0.8)
             ])
         
+
         tableView.style { v in
             v.register(SearchResultCell.self, forCellReuseIdentifier: "cell")
             v.estimatedRowHeight = 80
@@ -100,6 +109,12 @@ class SearchViewController: UIViewController {
             showNoResult.bind(to: tableView.rx.isHidden),
             viewModel.output.hint.bind(to: noResultHintView.rx.text)
         )
+        
+        // others
+        closeButton.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] _ in
+            self?.view.endEditing(true)
+            self?.dismiss(animated: true, completion: nil)
+        }).disposed(by: bag)
     }
     
     private let bag = DisposeBag()
