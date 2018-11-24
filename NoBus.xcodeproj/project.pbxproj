@@ -216,9 +216,9 @@
 		3ECAAD15219B2D8800FD6362 /* Input */ = {
 			isa = PBXGroup;
 			children = (
-				3ECAAD1A219B2E2D00FD6362 /* SearchViewController.swift */,
 				416BDC82219F38F3000898C8 /* ManageViewController.swift */,
 				416BDC83219F38F4000898C8 /* ManageViewModel.swift */,
+				3ECAAD1A219B2E2D00FD6362 /* SearchViewController.swift */,
 				3ECAAD1C219B2E3A00FD6362 /* SearchViewModel.swift */,
 			);
 			path = Input;

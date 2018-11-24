@@ -48,7 +48,7 @@ class StationSearchManager {
                     } else {
                         lines = lineMetas
                     }
-                    if lines.count > 5 {
+                    if lines.count > 5 && (lineNumber == nil || lineNumber!.count < 3) {
                         observer.onNext([])
                         observer.onCompleted()
                         return
