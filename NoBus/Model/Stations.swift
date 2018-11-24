@@ -10,7 +10,7 @@ import Foundation
 import fucking_beijing_bus_api
 
 // another representation of LineDetail.Station
-struct Station {
+struct Station: Equatable {
     var name: String {
         return apiObject.name
     }
@@ -32,13 +32,18 @@ struct Station {
             nextStation = nil
         }
     }
+    
+    public static func == (lhs: Station, rhs: Station) -> Bool {
+        return lhs.belongedToLine.ID == rhs.belongedToLine.ID 
+            && lhs.apiObject.index == rhs.apiObject.index
+    }
 }
 
 
 /// API 中车站是附属于线路的，这里的 model 是以车站为出发点看的
-struct GeneralStation {
+final class GeneralStation {
     let name: String
-    let stationsInLines: [Station]
+    var stationsInLines: [Station]
     
     init(stations:[Station]) {
         assert(stations.count > 0)
