@@ -79,9 +79,9 @@ class SearchViewController: UIViewController {
         }
         
         // keyboard
-        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapBlank))
-        tableView.addGestureRecognizer(tap)
-        view.addGestureRecognizer(tap)
+        //        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapBlank))
+        //        tableView.addGestureRecognizer(tap)
+        //        view.addGestureRecognizer(tap)
         tableView.keyboardDismissMode = .onDrag
         
         DispatchQueue.main.async {
@@ -109,6 +109,16 @@ class SearchViewController: UIViewController {
             showNoResult.bind(to: tableView.rx.isHidden),
             viewModel.output.hint.bind(to: noResultHintView.rx.text)
         )
+        
+        // table view action
+        
+        tableView.rx.modelSelected(Station.self).subscribe(onNext: {[weak self] s in
+            // add
+            StationsManager.shared.addToSaved(station: s)
+            // dismiss
+            self?.view.endEditing(true)
+            self?.dismiss(animated: true, completion: nil)
+        }).disposed(by: bag)
         
         // others
         closeButton.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] _ in

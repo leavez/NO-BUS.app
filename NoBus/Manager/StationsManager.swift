@@ -67,6 +67,7 @@ class StationsManager {
         set {
             checkThread()
             _cached = newValue
+            allStations.onNext(newValue)
             let data = try? encoder.encode(newValue)
             UserDefaults.standard.set(data, forKey: key)
         }

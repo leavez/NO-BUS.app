@@ -27,7 +27,7 @@ class CardListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         DispatchQueue.main.async {
-            self.present(SearchViewController(), animated: true, completion: nil)
+            self.present(ManageViewController(), animated: true, completion: nil)
         }
         view.sv(collectionView)
         view.layout(
