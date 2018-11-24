@@ -16,7 +16,10 @@ class MainListViewModel {
     public let items = Variable<[ItemViewModel.Section]>([])
     
     init() {
-        loadData()
+        StationsManager.shared.allStations.asObserver()
+            .flatMapLatest({ [unowned self] in
+                self.loadData(stations: $0)
+            })
             .map(render)
             .catchErrorJustReturn([])
             .bind(to: items)
@@ -24,13 +27,12 @@ class MainListViewModel {
     }
     
     
-    func render(data: (spots:[Spot], map:[String:BusStatusForStation]))
+    func render(data: (stations:[GeneralStation], map:[String:BusStatusForStation]))
         -> [ItemViewModel.Section] {
-
-        return data.spots.map { (spot) -> ItemViewModel.Section in
             
             var group = ItemViewModel.Section()
-            group.stations = spot.stations.map({ (generalStation:GeneralStation) ->
+            
+            group.stations = data.stations.map({ (generalStation:GeneralStation) ->
                 ItemViewModel.StationCell in
                 
                 let lines = generalStation.stationsInLines.compactMap({
@@ -47,32 +49,35 @@ class MainListViewModel {
                 let s = ItemViewModel.StationCell(stationName: generalStation.name, lines: lines)
                 return s
             })
-            return group
-        }
+            return [group]
     }
     
-    func loadData() -> Observable<(spots:[Spot], map:[String:BusStatusForStation])> {
+    func loadData(stations: [GeneralStation]) -> Observable<(stations:[GeneralStation], map:[String:BusStatusForStation])> {
+        
         
         return Observable.create { (observer) -> Disposable in
             
-            SpotsManager.shared.getAllSpot { (spots) in
-                DataFetcher.getStatus(for: spots) {
-                    (result: Result<[String:BusStatusForStation]>) -> () in
-                    switch result {
-                    case .success(let v):
-                        observer.onNext((spots, v))
-                        observer.onCompleted()
-                    case .failure(let e):
-                        observer.onError(e)
-                    }
+            let s = stations.flatMap {
+                $0.stationsInLines
+            }
+            
+            DataFetcher.getStatus(for: s) {
+                (result: Result<[String:BusStatusForStation]>) -> () in
+                switch result {
+                case .success(let v):
+                    observer.onNext((stations, v))
+                    observer.onCompleted()
+                case .failure(let e):
+                    observer.onError(e)
                 }
             }
+            
             return Disposables.create()
         }
     }
     
     private let bag = DisposeBag()
-
+    
 }
 
 
