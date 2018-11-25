@@ -38,6 +38,7 @@ class ManageViewController: UIViewController {
             v.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 60, right: 0)
             let margin = MarginHelper.margin(for: self)
             v.separatorInset = UIEdgeInsets(top: 0, left: margin+15, bottom: 0, right: margin)
+            v.backgroundColor = UIColor.table.background
         }
         tableView.register(SearchResultCell.self, forCellReuseIdentifier: "cell")
         tableView.estimatedRowHeight = 80

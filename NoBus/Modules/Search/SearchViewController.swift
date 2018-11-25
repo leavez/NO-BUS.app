@@ -69,6 +69,7 @@ class SearchViewController: UIViewController {
             v.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 60, right: 0)
             let margin = MarginHelper.margin(for: self)
             v.separatorInset = UIEdgeInsets(top: 0, left: margin+15, bottom: 0, right: margin)
+            v.backgroundColor = UIColor.table.background
         }
         
         noResultHintView.style { (v) in
@@ -162,6 +163,9 @@ class SearchField: UIView {
             $0.layer.shadowOffset = CGSize(width: 0.3, height: 1)
             $0.layer.cornerRadius = 20
         }
+        self.realField.style {
+            $0.textColor = UIColor.table.plainTitle
+        }
 
 
         let tap = UITapGestureRecognizer(target: realField, action: #selector(becomeFirstResponder))
@@ -189,6 +193,7 @@ class SearchResultCell: UITableViewCell {
             |-(margin+10)-stationNameLabel-(margin+10)-|,
             15
         )
+        self.backgroundColor = UIColor.table.background
         titleLabel.style {
             $0.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title1)
             $0.textColor = UIColor.table.plainTitle

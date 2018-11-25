@@ -11,7 +11,7 @@ import UIKit
 extension UIColor {
     
     static var table: ColorTable {
-        return RedTable()
+        return LightTheme()
     }
 }
 
@@ -30,7 +30,7 @@ protocol ColorTable {
     
 }
 
-struct RedTable: ColorTable {
+struct LightTheme: ColorTable {
     var title: UIColor {
         return UIColor(hexString: "fb6542")
     }
@@ -58,6 +58,37 @@ struct RedTable: ColorTable {
     }
     var cardShadowHeavy: CGColor {
         return UIColor.darkGray.cgColor
+    }
+}
+
+struct DarkTheme: ColorTable {
+    var title: UIColor {
+        return UIColor(hexString: "ffffff")
+    }
+    var largeTitle: UIColor {
+        return title.light
+    }
+    var plainTitle: UIColor {
+        return UIColor(white: 0.9, alpha: 1)
+    }
+    var subDescription: UIColor {
+        return UIColor(white: 0.8, alpha: 1)
+    }
+    var background: UIColor {
+        return UIColor(white: 0.05, alpha: 1)
+    }
+    var cardBackgroud: UIColor {
+        return UIColor(hexString: "131313")
+    }
+    
+    var cardBorderLight: CGColor {
+        return UIColor(white: 0.5, alpha: 0.7).cgColor
+    }
+    var cardBorder: CGColor {
+        return UIColor(white: 0.8, alpha: 0.3).cgColor
+    }
+    var cardShadowHeavy: CGColor {
+        return UIColor.lightGray.cgColor
     }
 }
 
