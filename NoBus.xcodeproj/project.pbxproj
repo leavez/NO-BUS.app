@@ -199,8 +199,9 @@
 		3ECAAD13219B2C5E00FD6362 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				3ECAAD15219B2D8800FD6362 /* Input */,
 				3ECAAD14219B2C6D00FD6362 /* CardList */,
+				3ECAAD15219B2D8800FD6362 /* Manage */,
+				412C516721AA98F600F6CABC /* Search */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -216,15 +217,22 @@
 			path = CardList;
 			sourceTree = "<group>";
 		};
-		3ECAAD15219B2D8800FD6362 /* Input */ = {
+		3ECAAD15219B2D8800FD6362 /* Manage */ = {
 			isa = PBXGroup;
 			children = (
 				416BDC82219F38F3000898C8 /* ManageViewController.swift */,
 				416BDC83219F38F4000898C8 /* ManageViewModel.swift */,
+			);
+			path = Manage;
+			sourceTree = "<group>";
+		};
+		412C516721AA98F600F6CABC /* Search */ = {
+			isa = PBXGroup;
+			children = (
 				3ECAAD1A219B2E2D00FD6362 /* SearchViewController.swift */,
 				3ECAAD1C219B2E3A00FD6362 /* SearchViewModel.swift */,
 			);
-			path = Input;
+			path = Search;
 			sourceTree = "<group>";
 		};
 		41462575219D6863003385F7 /* Views */ = {

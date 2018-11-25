@@ -12,20 +12,20 @@ import RxSwift
 
 class ManageViewController: UIViewController {
     
-    let closeButton = BigCloseButton()
-    let addButton = BigCloseButton()
     
     let tableView = UITableView(frame: .zero, style: .grouped)
     let viewModel = ManageViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.sv(tableView, closeButton, addButton)
+        // style
+        self.title = "Settings"
+        
+        // table view
+        view.sv(tableView)
         tableView.fillContainer()
         tableView.register(SearchResultCell.self, forCellReuseIdentifier: "cell")
         tableView.estimatedRowHeight = 80
-        closeButton.top(20).left(20)
-        addButton.top(20).right(20)
 
         viewModel.output.items.bind(to: tableView.rx.items(cellIdentifier: "cell")) {
             (index, data, cell) in
@@ -34,15 +34,26 @@ class ManageViewController: UIViewController {
             }.disposed(by: bag)
         
         // others
-        closeButton.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] _ in
-            self?.view.endEditing(true)
-            self?.dismiss(animated: true, completion: nil)
-        }).disposed(by: bag)
-        
-        addButton.rx.controlEvent(.touchUpInside).subscribe(onNext: {[weak self] _ in
-            self?.present(SearchViewController(), animated: true, completion: nil)
-        }).disposed(by: bag)
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didTapDone))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAdd))
+
+    }
+    
+    
+    static func embededInNavigationController() -> UIViewController {
+        let navi = UINavigationController(rootViewController: self.init())
+        navi.modalPresentationStyle = .pageSheet
+        navi.navigationBar.prefersLargeTitles = true
+        return navi
     }
     
     private let bag = DisposeBag()
+    
+    @objc private func didTapDone() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    @objc private func didTapAdd() {
+        self.present(SearchViewController(), animated: true, completion: nil)
+    }
 }
+

@@ -27,9 +27,6 @@ class CardListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        DispatchQueue.main.async {
-//            self.present(ManageViewController(), animated: true, completion: nil)
-        }
         view.sv(collectionView)
         view.layout(
             0,
@@ -92,6 +89,14 @@ class CardListViewController: UIViewController {
                 self.collectionView.deselectItem(at: index, animated: true)
             })
         }).disposed(by: bag)
+        
+        // when seleted setting entrance
+        collectionView.rx.modelSelected(ItemViewModel.StationCell.self)
+            .filter({ $0.name == SettingCell.settingIdentifier})
+            .bind {[unowned self] _ in
+                let naviVC = ManageViewController.embededInNavigationController()
+                self.present(naviVC, animated: true, completion: nil)
+        }.disposed(by: bag)
 
     }
 
