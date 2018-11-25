@@ -16,11 +16,8 @@ struct ManageViewModel {
     struct Output {
         let items = BehaviorSubject<[Station]>(value: [])
     }
-    struct Input {
-        
-    }
+    
     let output = Output()
-    let input = Input()
     
     init() {
         StationsManager.shared.allStations
@@ -31,6 +28,12 @@ struct ManageViewModel {
             .bind(to: output.items)
             .disposed(by: bag)
     }
+    
+    func didTapRemoveStation(station: Station) {
+        StationsManager.shared.removeFromSaved(station: station)
+    }
+    
+    
     
     private let bag = DisposeBag()
 }

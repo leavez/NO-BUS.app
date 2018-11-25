@@ -30,23 +30,18 @@ class SearchViewController: UIViewController {
         view.backgroundColor = .white
 
         view.sv(
-            closeButton,
             tableView,
+            noResultHintView,
             inputField,
-            noResultHintView
+            closeButton
         )
         
-        let margin = MarginHelper.margin(for: self)
+        let margin = MarginHelper.margin(for: self) - 12
         
         NSLayoutConstraint.activate([
-            closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant:10),
-            closeButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -margin),
-            ])
-        
-        NSLayoutConstraint.activate([
-            inputField.topAnchor.constraint(equalTo: closeButton.bottomAnchor, constant:15),
-            inputField.leftAnchor.constraint(equalTo: view.leftAnchor, constant: margin),
-            inputField.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -margin)
+            inputField.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant:15),
+            inputField.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor, constant: margin),
+            inputField.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor, constant: -margin)
             ])
         
         NSLayoutConstraint.activate([
@@ -62,12 +57,17 @@ class SearchViewController: UIViewController {
             noResultHintView.widthAnchor.constraint(lessThanOrEqualTo: view.widthAnchor, multiplier: 0.8)
             ])
         
+        NSLayoutConstraint.activate([
+            closeButton.centerYAnchor.constraint(equalTo: inputField.centerYAnchor),
+            closeButton.rightAnchor.constraint(equalTo: inputField.rightAnchor, constant: -15),
+            ])
 
         tableView.style { v in
             v.register(SearchResultCell.self, forCellReuseIdentifier: "cell")
             v.estimatedRowHeight = 80
             v.tableFooterView = UIView()
             v.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 60, right: 0)
+            let margin = MarginHelper.margin(for: self)
             v.separatorInset = UIEdgeInsets(top: 0, left: margin+15, bottom: 0, right: margin)
         }
         
@@ -142,9 +142,13 @@ class SearchField: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         sv(realField)
-        realField.fillContainer(20)
+        self.layout(
+            20,
+            |-30-realField-50-|,
+            20
+        )
         realField.placeholder = "例如：321 学院路 xueyuanlu"
-        realField.clearButtonMode = .unlessEditing
+        realField.clearButtonMode = .never
         
         self.style {
             $0.backgroundColor = .white

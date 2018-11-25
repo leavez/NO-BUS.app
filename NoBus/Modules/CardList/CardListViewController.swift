@@ -103,7 +103,7 @@ class CardListViewController: UIViewController {
 }
 
 class SettingCell: StationCardCell {
-    static let settingIdentifier = "setting"
+    static let settingIdentifier = "identifier.setting"
     
     let title = UILabel()
 
@@ -115,7 +115,7 @@ class SettingCell: StationCardCell {
         contentView.sv(title)
         title.fillContainer(20)
         title.textAlignment = .center
-        title.text = "SETTING"
+        title.text = "Settings"
         title.font = UIFont.preferredFont(forTextStyle: .largeTitle)
         title.textColor = UIColor.table.subDescription.light
     }

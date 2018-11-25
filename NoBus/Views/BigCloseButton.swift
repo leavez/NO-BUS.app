@@ -8,13 +8,24 @@
 
 import UIKit
 
-class BigCloseButton: UIButton {
+class AlphaButton: UIButton {
+    convenience init() {
+        self.init(type: .system)
+    }
+    override func setImage(_ image: UIImage?, for state: UIControl.State) {
+        let newImage = image?.withRenderingMode(.alwaysOriginal)
+        super.setImage(newImage, for: state)
+    }
+}
+
+class BigCloseButton: AlphaButton {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.setTitle("X", for: .normal)
+        self.setImage(UIImage(named: "close"), for: .normal)
         self.setTitleColor(UIColor(white: 0.5, alpha: 1), for: .normal)
         titleLabel?.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title2)
+        self.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     }
     
     required init?(coder aDecoder: NSCoder) {
