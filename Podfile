@@ -9,6 +9,8 @@ target 'NoBus' do
   pod 'RxDataSources'
   pod 'SteviaLayout'
   
+  # pod 'THLabel'
+
   target 'NoBusTests' do
     inherit! :search_paths
     # Pods for testing

@@ -25,20 +25,19 @@ class StationCardCell: UICollectionViewCell {
         )
         contentView.layout(
             30,
-            |-(15)-stataionNameLabel-100-|,
+            |-(15)-stataionNameLabel-15-|,
             20,
             |-10-itemsView-10-|,
             30
         )
         NSLayoutConstraint.activate([
-            contentView.widthAnchor.constraint(greaterThanOrEqualToConstant: 280),
-            contentView.widthAnchor.constraint(lessThanOrEqualToConstant: 320)
+            contentView.widthAnchor.constraint(equalToConstant: 310)
             ])
         
         
         self.style {
             $0.layer.borderWidth = 0.5
-            $0.layer.borderColor = UIColor(white: 0.8, alpha: 0.3).cgColor
+            $0.layer.borderColor = UIColor(white: 0.9, alpha: 0.7).cgColor
             $0.backgroundColor = .white
             $0.layer.shadowRadius = 15
             $0.layer.shadowColor = UIColor.darkGray.cgColor
@@ -48,10 +47,13 @@ class StationCardCell: UICollectionViewCell {
         
         stataionNameLabel.style {
             $0.font = UIFont.preferredFont(forTextStyle: .largeTitle)
-            $0.textColor = UIColor(white: 0.5, alpha: 1)
+            $0.textColor = UIColor.table.subDescription
+            $0.textColor = UIColor.table.largeTitle
+            $0.adjustsFontSizeToFitWidth = true
+            $0.minimumScaleFactor = 0.8
         }
         itemsView.style {
-            $0.spacing = 10
+            $0.spacing = 12
             $0.axis = .vertical
         }
         
@@ -72,8 +74,10 @@ class StationCardCell: UICollectionViewCell {
         stataionNameLabel.text = viewModel.name
         viewModel.lines.bind { (data) in
             // remove old
-            self.itemsView.arrangedSubviews
-                .forEach(self.itemsView.removeArrangedSubview(_:))
+            self.itemsView.arrangedSubviews.forEach {
+                self.itemsView.removeArrangedSubview($0)
+                $0.removeFromSuperview()
+            }
             
             // add new
             let lineViews = data.map { (line) -> UIView in
@@ -146,16 +150,16 @@ class LineItemView: UIView {
             $0.highlightedView.layer.cornerRadius = $0.layer.cornerRadius
             
             $0.lineNumberLabel.style({
-                $0.font = UIFont.preferredFont(forTextStyle: .headline)
-                $0.textColor = UIColor(white: 0.2, alpha: 1)
+                $0.font = UIFont.preferredFont(forTextStyle: .title2)
+                $0.textColor = UIColor.table.title
             })
             for label in [$0.remainDistanceLabel, $0.remainTimeLabel] {
                 label.font = .preferredFont(forTextStyle: UIFont.TextStyle.subheadline)
-                label.textColor = UIColor(white: 0.5, alpha: 1)
+                label.textColor = UIColor.table.subDescription
             }
             $0.updatedTimeLabel.style({ (l) in
                 l.font = .preferredFont(forTextStyle: UIFont.TextStyle.footnote)
-                l.textColor = UIColor(white: 0.5, alpha: 1)
+                l.textColor = UIColor.table.subDescription
             })
         }
         

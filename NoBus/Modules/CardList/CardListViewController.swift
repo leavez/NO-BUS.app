@@ -27,7 +27,7 @@ class CardListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         DispatchQueue.main.async {
-            self.present(ManageViewController(), animated: true, completion: nil)
+//            self.present(ManageViewController(), animated: true, completion: nil)
         }
         view.sv(collectionView)
         view.layout(
@@ -40,7 +40,9 @@ class CardListViewController: UIViewController {
             let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
             layout.sectionInset = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
             layout.estimatedItemSize = CGSize(width: 100, height: 100)
-            collectionView.backgroundColor = UIColor.white
+            layout.minimumInteritemSpacing = 40
+            layout.minimumLineSpacing = 40
+            collectionView.backgroundColor = .white // UIColor(red: 0.94, green: 0.94, blue: 0.96, alpha: 1)
             collectionView.alwaysBounceVertical = true
         }
         
