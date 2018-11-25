@@ -93,6 +93,36 @@ class StationCardCell: UICollectionViewCell {
     }
     
     private(set) var reuseDisposeBag = DisposeBag()
+    
+    override var isSelected: Bool {
+        set {
+            super.isSelected = newValue
+            setScaled(newValue)
+        }
+        get {
+            return super.isSelected
+        }
+    }
+    
+    override var isHighlighted: Bool {
+        set {
+            super.isHighlighted = newValue
+            setScaled(newValue)
+        }
+        get {
+            return super.isHighlighted
+        }
+    }
+    
+    private func setScaled(_ enable: Bool) {
+        let scale: CGFloat = 1.05
+        let transform = enable ? CGAffineTransform(scaleX: scale, y: scale) : .identity
+        UIView.animate(withDuration: 0.2, animations: {
+            UIView.setAnimationCurve(UIView.AnimationCurve.easeOut)
+            UIView.setAnimationBeginsFromCurrentState(true)
+            self.transform = transform
+        })
+    }
 }
 
 

@@ -13,6 +13,7 @@ import Stevia
 import RxSwift
 import RxCocoa
 import RxDataSources
+import RxGesture
 
 
 
@@ -40,12 +41,17 @@ class CardListViewController: UIViewController {
             collectionView.register(SettingCell.self, forCellWithReuseIdentifier: SettingCell.settingIdentifier)
             let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
             layout.sectionInset = UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30)
-            layout.estimatedItemSize = CGSize(width: 100, height: 100)
+            layout.estimatedItemSize = CGSize(width: 300, height: 300)
             layout.minimumInteritemSpacing = 30
             layout.minimumLineSpacing = 30
             collectionView.backgroundColor = .white // UIColor(red: 0.94, green: 0.94, blue: 0.96, alpha: 1)
             collectionView.alwaysBounceVertical = true
         }
+        setupCollectionBehavior()
+        
+
+
+        
         
 
         
@@ -73,31 +79,28 @@ class CardListViewController: UIViewController {
             .bind(to: collectionView.rx.items(dataSource: dataSource))
             .disposed(by: bag)
 
-        
-
-        
-//        viewModel.items.asObservable()
-//            .bind(to: collectionView.rx.items(cellIdentifier: "cell")) {
-//                (index, item: [String], cell) in
-//                cell.backgroundColor = .white
-//            }
-
-        
-//        let tap = UITapGestureRecognizer(target: self, action: #selector(load))
-//        textView.addGestureRecognizer(tap)
     }
     
   
-//    func settingEntrance() -> UIView {
-//        
-//    }
+    func setupCollectionBehavior()  {
+
+        // deselect cell when tap blank area
+        collectionView.backgroundView = UIView()
+        collectionView.backgroundView?.rx.tapGesture().subscribe(onNext: {
+            [unowned self]_ in
+            self.collectionView.indexPathsForSelectedItems?.forEach({ index in
+                self.collectionView.deselectItem(at: index, animated: true)
+            })
+        }).disposed(by: bag)
+
+    }
 
 }
 
 class SettingCell: StationCardCell {
     static let settingIdentifier = "setting"
     
-    let title = UIButton()
+    let title = UILabel()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -106,13 +109,24 @@ class SettingCell: StationCardCell {
         }
         contentView.sv(title)
         title.fillContainer(20)
-        title.setTitle("SETTING", for: .normal)
-        title.titleLabel?.font = UIFont.preferredFont(forTextStyle: .largeTitle)
-        title.setTitleColor(UIColor.table.subDescription.light, for: .normal)
+        title.textAlignment = .center
+        title.text = "SETTING"
+        title.font = UIFont.preferredFont(forTextStyle: .largeTitle)
+        title.textColor = UIColor.table.subDescription.light
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    override var isSelected: Bool {
+        set {}
+        get { return super.isSelected }
+    }
+    
+    override var isHighlighted: Bool {
+        set {}
+        get { return super.isHighlighted }
+    }
+    
 }
 
