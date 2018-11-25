@@ -97,6 +97,13 @@ class CardListViewController: UIViewController {
                 let naviVC = ManageViewController.embededInNavigationController()
                 self.present(naviVC, animated: true, completion: nil)
         }.disposed(by: bag)
+        
+        // temp
+        collectionView.rx.modelSelected(ItemViewModel.StationCell.self)
+            .filter({ $0.name != SettingCell.settingIdentifier})
+            .bind {[unowned self] _ in
+                self.viewModel.refreshData()
+            }.disposed(by: bag)
 
     }
 

@@ -15,8 +15,17 @@ class MainListViewModel {
     
     public let items = Variable<[ItemViewModel.Section]>([])
     
+    func refreshData() {
+        refreshTrigger.onNext(1)
+    }
+        
+        
     init() {
-        StationsManager.shared.allStations.asObserver()
+        Observable.combineLatest(
+            StationsManager.shared.allStations.asObserver(),
+            refreshTrigger.asObserver()
+            )
+            .map { $0.0 }
             .flatMapLatest({ [unowned self] in
                 self.loadData(stations: $0)
             })
@@ -24,8 +33,13 @@ class MainListViewModel {
             .catchErrorJustReturn([])
             .bind(to: items)
             .disposed(by: bag)
+        
+        // As refreshTrigger is a publish subject, which have no intial value
+        // so the combineLatest will wait until the first value sent
+        refreshTrigger.onNext(1)
     }
-    
+
+    private let refreshTrigger = PublishSubject<Int>()
     
     func render(data: (stations:[GeneralStation], map:[String:BusStatusForStation]))
         -> [ItemViewModel.Section] {
