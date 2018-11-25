@@ -37,10 +37,10 @@ class StationCardCell: UICollectionViewCell {
         
         self.style {
             $0.layer.borderWidth = 0.5
-            $0.layer.borderColor = UIColor(white: 0.9, alpha: 0.7).cgColor
-            $0.backgroundColor = .white
+            $0.layer.borderColor = UIColor.table.cardBorderLight
+            $0.backgroundColor = UIColor.table.cardBackgroud
             $0.layer.shadowRadius = 15
-            $0.layer.shadowColor = UIColor.darkGray.cgColor
+            $0.layer.shadowColor = UIColor.table.cardShadowHeavy
             $0.layer.shadowOpacity = 0.2
             $0.layer.shadowOffset = CGSize(width: 0, height: 4)
         }
@@ -139,7 +139,7 @@ class LineItemView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .white
+        self.backgroundColor = UIColor.table.cardBackgroud
         self.sv(
             highlightedView,
             lineNumberLabel,
@@ -172,7 +172,7 @@ class LineItemView: UIView {
         
         self.style {
             $0.layer.shadowRadius = 2
-            $0.layer.shadowColor = UIColor.darkGray.cgColor
+            $0.layer.shadowColor = UIColor.table.cardShadowHeavy
             $0.layer.shadowOpacity = 0.2
             $0.layer.shadowOffset = CGSize(width: 0.3, height: 1)
             $0.layer.cornerRadius = LineItemView.cornerRaius

@@ -23,7 +23,6 @@ class BigCloseButton: AlphaButton {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.setImage(UIImage(named: "close"), for: .normal)
-        self.setTitleColor(UIColor(white: 0.5, alpha: 1), for: .normal)
         titleLabel?.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title2)
         self.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     }

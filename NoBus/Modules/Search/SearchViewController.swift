@@ -27,7 +27,7 @@ class SearchViewController: UIViewController {
         self.binding()
         StationSearchManager.shared.warmUpCache()
         
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor.table.background
 
         view.sv(
             tableView,
@@ -75,7 +75,7 @@ class SearchViewController: UIViewController {
             v.numberOfLines = 5
             v.textAlignment = .center
             v.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title2)
-            v.textColor = UIColor(white: 0.5, alpha: 1)
+            v.textColor = UIColor.table.subDescription
         }
         
         // keyboard
@@ -151,13 +151,13 @@ class SearchField: UIView {
         realField.clearButtonMode = .never
         
         self.style {
-            $0.backgroundColor = .white
+            $0.backgroundColor = UIColor.table.cardBackgroud
             
             $0.layer.borderWidth = 0.5
-            $0.layer.borderColor = UIColor(white: 0.8, alpha: 0.3).cgColor
+            $0.layer.borderColor = UIColor.table.cardBorder
             
             $0.layer.shadowRadius = 2
-            $0.layer.shadowColor = UIColor.darkGray.cgColor
+            $0.layer.shadowColor = UIColor.table.cardShadowHeavy
             $0.layer.shadowOpacity = 0.2
             $0.layer.shadowOffset = CGSize(width: 0.3, height: 1)
             $0.layer.cornerRadius = 20
@@ -191,10 +191,11 @@ class SearchResultCell: UITableViewCell {
         )
         titleLabel.style {
             $0.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.title1)
+            $0.textColor = UIColor.table.plainTitle
         }
         stationNameLabel.style {
             $0.font = UIFont.preferredFont(forTextStyle: UIFont.TextStyle.body)
-            $0.textColor = UIColor(white: 0.5, alpha: 1)
+            $0.textColor = UIColor.table.subDescription
         }
     }
     

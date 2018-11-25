@@ -41,7 +41,7 @@ class CardListViewController: UIViewController {
             layout.estimatedItemSize = CGSize(width: 300, height: 300)
             layout.minimumInteritemSpacing = 30
             layout.minimumLineSpacing = 30
-            collectionView.backgroundColor = .white // UIColor(red: 0.94, green: 0.94, blue: 0.96, alpha: 1)
+            collectionView.backgroundColor = UIColor.table.background
             collectionView.alwaysBounceVertical = true
         }
         setupCollectionBehavior()

@@ -42,7 +42,7 @@ class ManageViewController: UIViewController {
         tableView.register(SearchResultCell.self, forCellReuseIdentifier: "cell")
         tableView.estimatedRowHeight = 80
         tableView.rx.setDelegate(self).disposed(by: bag)
-        self.view.backgroundColor = UIColor.white
+        self.view.backgroundColor = UIColor.table.background
         
         addButton.style {
             $0.setImage(UIImage(named: "add"), for: .normal)
