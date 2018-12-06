@@ -125,7 +125,6 @@ public class RefreshButtonViewModel {
     
     init() {
         input.isReloading
-            .debounce(0.5, scheduler: MainScheduler.asyncInstance)
             .bind(to: output.isReloading).disposed(by: bag)
         input.isReloading
             .map{ !$0 }

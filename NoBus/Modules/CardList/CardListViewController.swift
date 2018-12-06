@@ -21,18 +21,27 @@ class CardListViewController: UIViewController {
 
     let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     
+    let refreshButton = RefreshButtonView(type: .system)
+    
     let viewModel = MainListViewModel()
     
     private let bag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.sv(collectionView)
+        view.sv(
+            collectionView,
+            refreshButton
+        )
         view.layout(
             0,
             |collectionView|,
             0
         )
+        refreshButton
+            .size(60)
+            .left(15).bottom(20)
+        
         collectionView.style { (collectionView) in
             collectionView.register(StationCardCell.self, forCellWithReuseIdentifier: "cell")
             collectionView.register(SettingCell.self, forCellWithReuseIdentifier: SettingCell.settingIdentifier)
@@ -75,6 +84,8 @@ class CardListViewController: UIViewController {
             })
             .bind(to: collectionView.rx.items(dataSource: dataSource))
             .disposed(by: bag)
+        
+        refreshButton.bind(vm: viewModel.refreshButtonViewModel)
 
     }
     
