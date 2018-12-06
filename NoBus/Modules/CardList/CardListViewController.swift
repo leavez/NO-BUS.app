@@ -113,7 +113,6 @@ class CardListViewController: UIViewController {
         collectionView.rx.modelSelected(ItemViewModel.StationCell.self)
             .filter({ $0.name != SettingCell.settingIdentifier})
             .bind {[unowned self] _ in
-                self.viewModel.refreshData()
             }.disposed(by: bag)
 
     }
