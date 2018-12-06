@@ -15,28 +15,37 @@ class MainListViewModel {
     
     public let items = Variable<[ItemViewModel.Section]>([])
     
+    public let refreshButtonViewModel = RefreshButtonViewModel()
+    
     func refreshData() {
         refreshTrigger.onNext(1)
     }
         
         
     init() {
-        Observable.combineLatest(
-            StationsManager.shared.allStations.asObserver(),
-            refreshTrigger.asObserver()
+        Observable.merge(
+            // merge multiple triggers
+            StationsManager.shared.allStations.asObserver().anyObservable(),
+            refreshTrigger.asObserver().anyObservable(),
+            refreshButtonViewModel.output.reloadAction.anyObservable(),
+            Observable.just(0 as AnyObject) // the initial trigger
             )
-            .map { $0.0 }
+            .map { _ in try StationsManager.shared.allStations.value() }
+            
+            // get the real time data, and bind it to output"
+            .do(onNext: {[unowned self] (_) in
+                self.refreshButtonViewModel.input.isReloading.onNext(true)
+            })
             .flatMapLatest({ [unowned self] in
                 self.loadData(stations: $0)
+            })
+            .do(onNext: {[unowned self] (_) in
+                self.refreshButtonViewModel.input.isReloading.onNext(false)
             })
             .map(render)
             .catchErrorJustReturn([])
             .bind(to: items)
             .disposed(by: bag)
-        
-        // As refreshTrigger is a publish subject, which have no intial value
-        // so the combineLatest will wait until the first value sent
-        refreshTrigger.onNext(1)
     }
 
     private let refreshTrigger = PublishSubject<Int>()
@@ -95,3 +104,66 @@ class MainListViewModel {
 }
 
 
+
+public class RefreshButtonViewModel {
+    
+    struct Input {
+        let manualTrigger = PublishSubject<Void>()
+        fileprivate let isReloading = BehaviorSubject(value: false)
+    }
+    struct Output {
+        fileprivate let reloadAction = PublishSubject<Void>()
+        let showNextTriggerCounterAnimation = PublishSubject<TimeInterval>()
+        let isReloading = BehaviorSubject(value: false)
+        let isEnabled = BehaviorSubject(value: true)
+    }
+    
+    let input = Input()
+    let output = Output()
+    
+    private let interval: TimeInterval = 5
+    
+    init() {
+        input.isReloading
+            .debounce(0.5, scheduler: MainScheduler.asyncInstance)
+            .bind(to: output.isReloading).disposed(by: bag)
+        input.isReloading
+            .map{ !$0 }
+            .bind(to: output.isEnabled).disposed(by: bag)
+        
+        
+        func oneLoop() {
+            let delay = Observable.just(()).delay(interval, scheduler: MainScheduler.asyncInstance)
+            let load = self.loadFinishedSignal()
+            
+            print("start a new loop for refresh")
+            output.showNextTriggerCounterAnimation.onNext(interval)
+            
+            Observable.merge(
+                delay,
+                input.manualTrigger
+            )
+            .take(1)
+            .do(onCompleted: { [unowned self] in
+                print("should do a refresh")
+                self.output.reloadAction.onNext(())
+            })
+            .concat(load)
+            .subscribe(onCompleted: {
+                oneLoop()
+            })
+            .disposed(by: bag)
+        }
+        
+        oneLoop()
+    }
+    
+    private func loadFinishedSignal() -> Observable<Void> {
+        return input.isReloading.asObserver()
+            .filter { $0 == false }
+            .map{ _ in () }
+            .take(1)
+    }
+    
+    private let bag = DisposeBag()
+}
