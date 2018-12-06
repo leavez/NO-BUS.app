@@ -26,14 +26,18 @@ class RefreshButtonView: UIButton {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        sv(loadingIndicator)
+        sv(progressView, loadingIndicator)
         loadingIndicator.centerInContainer()
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.isUserInteractionEnabled = false
+        loadingIndicator.style { (loadingIndicator) in
+            loadingIndicator.hidesWhenStopped = true
+            loadingIndicator.isUserInteractionEnabled = false
+        }
         
-        self.rx.controlEvent(.touchUpInside).subscribe(onNext: { [weak self] _ in
-            self?.viewModel?.manualTrigger.onNext(())
-        }).disposed(by: bag)
+        progressView.fillContainer()
+        progressView.style { (progressView) in
+            progressView.isUserInteractionEnabled = false
+        }
+        
         
         self.style {
             $0.layer.borderWidth = 0.5
@@ -43,7 +47,12 @@ class RefreshButtonView: UIButton {
             $0.layer.shadowOpacity = 0.3
             $0.layer.shadowRadius = 10
             $0.layer.shadowOffset = CGSize(width: 0, height: 5)
+            $0.backgroundColor = UIColor.table.cardBackgroud
         }
+        
+        self.rx.controlEvent(.touchUpInside).subscribe(onNext: { [weak self] _ in
+            self?.viewModel?.manualTrigger.onNext(())
+        }).disposed(by: bag)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -55,17 +64,31 @@ class RefreshButtonView: UIButton {
         self.layer.cornerRadius = self.bounds.width / 2
     }
     
-    private var viewModel: RefreshButtonViewModel.Input?
     
     private let loadingIndicator = UIActivityIndicatorView(style: .gray)
+    private let progressView: UIView = {
+        let v = UIView()
+        v.backgroundColor = .clear
+        let width: CGFloat = 10
+        let dot = UIView()
+        dot.backgroundColor = UIColor.table.subDescription.withAlphaComponent(0.2)
+        v.sv(dot)
+        dot.centerHorizontally().top(1.5).size(width)
+        dot.layer.cornerRadius = width / 2
+        return v
+    }()
 
+    private var viewModel: RefreshButtonViewModel.Input?
+    
     private let bag = DisposeBag()
     
     private func showToLoadAnimation(duration:TimeInterval) {
-        self.backgroundColor = UIColor.table.cardBackgroud
-        UIView.animate(withDuration: duration, delay: 0, options: .allowUserInteraction, animations: {
-            self.backgroundColor = .red
-        }, completion: nil)
+        let ani = CABasicAnimation(keyPath: "transform.rotation.z")
+        ani.fromValue = 0
+        ani.toValue = 2 * CGFloat.pi
+        ani.duration = duration
+        ani.timingFunction = CAMediaTimingFunction(name: .easeInEaseOut)
+        progressView.layer.add(ani, forKey: "rotate")
     }
 }
 

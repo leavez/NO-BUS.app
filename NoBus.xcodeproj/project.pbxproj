@@ -19,6 +19,7 @@
 		3E4991832182361300BFFBCB /* DataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4991822182361300BFFBCB /* DataFetcher.swift */; };
 		3E4991872184C56800BFFBCB /* MainListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4991862184C56800BFFBCB /* MainListViewModel.swift */; };
 		3E7E6544218566BA00997D9F /* StationCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7E6543218566BA00997D9F /* StationCardCell.swift */; };
+		3EAD9F8721B995B2005E0F21 /* RxSwift+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAD9F8621B995B2005E0F21 /* RxSwift+extension.swift */; };
 		3ECAAD0C2199D90100FD6362 /* ItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECAAD0B2199D90100FD6362 /* ItemViewModel.swift */; };
 		3ECAAD0F2199EE4700FD6362 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECAAD0E2199EE4700FD6362 /* Time.swift */; };
 		3ECAAD112199EF7200FD6362 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECAAD102199EF7200FD6362 /* Date+extension.swift */; };
@@ -67,6 +68,7 @@
 		3E4991822182361300BFFBCB /* DataFetcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataFetcher.swift; sourceTree = "<group>"; };
 		3E4991862184C56800BFFBCB /* MainListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainListViewModel.swift; sourceTree = "<group>"; };
 		3E7E6543218566BA00997D9F /* StationCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationCardCell.swift; sourceTree = "<group>"; };
+		3EAD9F8621B995B2005E0F21 /* RxSwift+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RxSwift+extension.swift"; sourceTree = "<group>"; };
 		3ECAAD0B2199D90100FD6362 /* ItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewModel.swift; sourceTree = "<group>"; };
 		3ECAAD0E2199EE4700FD6362 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		3ECAAD102199EF7200FD6362 /* Date+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extension.swift"; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				3ECAAD102199EF7200FD6362 /* Date+extension.swift */,
 				4131F495219C5184000D5455 /* String+extension.swift */,
 				412C516121AA6C6C00F6CABC /* UIColor+Extension.swift */,
+				3EAD9F8621B995B2005E0F21 /* RxSwift+extension.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -417,7 +420,6 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-NoBus/Pods-NoBus-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
-				"${BUILT_PRODUCTS_DIR}/MKRingProgressView/MKRingProgressView.framework",
 				"${BUILT_PRODUCTS_DIR}/Mappable/Mappable.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
@@ -430,7 +432,6 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MKRingProgressView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mappable.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
@@ -478,6 +479,7 @@
 				416BDC84219F38F4000898C8 /* ManageViewController.swift in Sources */,
 				4131F496219C5184000D5455 /* String+extension.swift in Sources */,
 				41462577219D6896003385F7 /* BigCloseButton.swift in Sources */,
+				3EAD9F8721B995B2005E0F21 /* RxSwift+extension.swift in Sources */,
 				3E4991872184C56800BFFBCB /* MainListViewModel.swift in Sources */,
 				3ECAAD1B219B2E2D00FD6362 /* SearchViewController.swift in Sources */,
 				3E7E6544218566BA00997D9F /* StationCardCell.swift in Sources */,

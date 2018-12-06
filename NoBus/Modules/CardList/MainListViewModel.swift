@@ -121,7 +121,7 @@ public class RefreshButtonViewModel {
     let input = Input()
     let output = Output()
     
-    private let interval: TimeInterval = 5
+    private let interval: TimeInterval = 10
     
     init() {
         input.isReloading
