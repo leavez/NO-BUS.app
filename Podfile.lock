@@ -5,6 +5,7 @@ PODS:
     - Alamofire
     - Mappable
   - Mappable (1.3.1)
+  - MKRingProgressView (2.2)
   - Nimble (7.3.1)
   - Quick (1.3.2)
   - RxCocoa (4.3.1):
@@ -21,6 +22,7 @@ PODS:
 
 DEPENDENCIES:
   - fucking-beijing-bus-api (from `https://github.com/leavez/fucking-beijing-bus-api.git`, tag `1.0.4`)
+  - MKRingProgressView
   - Nimble
   - Quick
   - RxCocoa
@@ -33,6 +35,7 @@ SPEC REPOS:
     - Alamofire
     - Differentiator
     - Mappable
+    - MKRingProgressView
     - Nimble
     - Quick
     - RxCocoa
@@ -56,6 +59,7 @@ SPEC CHECKSUMS:
   Differentiator: be49ca3408f0ecfc761e4c7763d20c62be01b9ad
   fucking-beijing-bus-api: bb4f1d2e5f5d9bb2bc7c776b19b8c89ffac31cb0
   Mappable: b623c512eac5f2bbba7968117fbf9550991f8e7c
+  MKRingProgressView: 6a8eb219f65d1f7ac27ad1986a4f42160b2f7640
   Nimble: 04f732da099ea4d153122aec8c2a88fd0c7219ae
   Quick: 2623cb30d7a7f41ca62f684f679586558f483d46
   RxCocoa: 78763c7b07d02455598d9fc3c1ad091a28b73635
@@ -64,6 +68,6 @@ SPEC CHECKSUMS:
   RxSwift: fe0fd770a43acdb7d0a53da411c9b892e69bb6e4
   SteviaLayout: dd74d1abd127bbf0ce346ac9430441684fe427d0
 
-PODFILE CHECKSUM: 9c5e6a259d96ad5acf8101c603e75b87f3102b00
+PODFILE CHECKSUM: 7ab1a937ba25fed98501bd9a61d6d5e835be87fa
 
 COCOAPODS: 1.5.3

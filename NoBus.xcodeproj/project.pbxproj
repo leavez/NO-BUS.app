@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3E038DDD21B9803C000D628F /* RxSwift+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E038DDC21B9803C000D628F /* RxSwift+extension.swift */; };
 		3E4991502180C58F00BFFBCB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E49914F2180C58F00BFFBCB /* AppDelegate.swift */; };
 		3E4991522180C58F00BFFBCB /* CardListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4991512180C58F00BFFBCB /* CardListViewController.swift */; };
 		3E4991552180C58F00BFFBCB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E4991532180C58F00BFFBCB /* Main.storyboard */; };
@@ -52,7 +51,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3E038DDC21B9803C000D628F /* RxSwift+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RxSwift+extension.swift"; sourceTree = "<group>"; };
 		3E49914C2180C58F00BFFBCB /* NoBus.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoBus.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E49914F2180C58F00BFFBCB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3E4991512180C58F00BFFBCB /* CardListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListViewController.swift; sourceTree = "<group>"; };
@@ -198,7 +196,6 @@
 				3ECAAD102199EF7200FD6362 /* Date+extension.swift */,
 				4131F495219C5184000D5455 /* String+extension.swift */,
 				412C516121AA6C6C00F6CABC /* UIColor+Extension.swift */,
-				3E038DDC21B9803C000D628F /* RxSwift+extension.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -378,16 +375,12 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputFileListPaths = (
-			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-NoBusTests/Pods-NoBusTests-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Nimble/Nimble.framework",
 				"${BUILT_PRODUCTS_DIR}/Quick/Quick.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Nimble.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Quick.framework",
@@ -424,6 +417,7 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-NoBus/Pods-NoBus-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
+				"${BUILT_PRODUCTS_DIR}/MKRingProgressView/MKRingProgressView.framework",
 				"${BUILT_PRODUCTS_DIR}/Mappable/Mappable.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
@@ -436,6 +430,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MKRingProgressView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mappable.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
@@ -483,7 +478,6 @@
 				416BDC84219F38F4000898C8 /* ManageViewController.swift in Sources */,
 				4131F496219C5184000D5455 /* String+extension.swift in Sources */,
 				41462577219D6896003385F7 /* BigCloseButton.swift in Sources */,
-				3E038DDD21B9803C000D628F /* RxSwift+extension.swift in Sources */,
 				3E4991872184C56800BFFBCB /* MainListViewModel.swift in Sources */,
 				3ECAAD1B219B2E2D00FD6362 /* SearchViewController.swift in Sources */,
 				3E7E6544218566BA00997D9F /* StationCardCell.swift in Sources */,

@@ -10,6 +10,7 @@ target 'NoBus' do
   pod "RxGesture"
   pod 'SteviaLayout'
   
+  pod 'MKRingProgressView'
   # pod 'THLabel'
 
   target 'NoBusTests' do
