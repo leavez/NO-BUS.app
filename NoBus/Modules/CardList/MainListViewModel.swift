@@ -125,7 +125,15 @@ public class RefreshButtonViewModel {
     
     init() {
         input.isReloading
+            // add a grace time
+            .flatMapLatest({ reloading -> Observable<Bool> in
+                if !reloading {
+                    return Observable.just(false)
+                }
+                return Observable.just(true).delay(0.3, scheduler: MainScheduler.instance)
+            })
             .bind(to: output.isReloading).disposed(by: bag)
+        
         input.isReloading
             .map{ !$0 }
             .bind(to: output.isEnabled).disposed(by: bag)
