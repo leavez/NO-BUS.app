@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 import RxSwift
 import Alamofire
 
@@ -138,7 +139,7 @@ public class RefreshButtonViewModel {
             .map{ !$0 }
             .bind(to: output.isEnabled).disposed(by: bag)
         
-        
+        // polling
         func oneLoop() {
             let delay = Observable.just(()).delay(interval, scheduler: MainScheduler.asyncInstance)
             let load = self.loadFinishedSignal()
@@ -146,7 +147,8 @@ public class RefreshButtonViewModel {
             print("start a new loop for refresh")
             output.showNextTriggerCounterAnimation.onNext(interval)
             
-            Observable.merge(
+            self.loopDispoable?.dispose()
+            self.loopDispoable = Observable.merge(
                 delay,
                 input.manualTrigger
             )
@@ -159,10 +161,26 @@ public class RefreshButtonViewModel {
             .subscribe(onCompleted: {
                 oneLoop()
             })
-            .disposed(by: bag)
+            self.loopDispoable?.disposed(by: bag)
         }
         
         oneLoop()
+        
+        // trigger when enter foreground
+        NotificationCenter.default.rx
+            .notification(UIApplication.willEnterForegroundNotification)
+            .subscribe(onNext: {[weak self] _ in
+                oneLoop()
+                self?.input.manualTrigger.onNext(())
+            }).disposed(by: bag)
+        
+        // stop when enter background
+        NotificationCenter.default.rx
+            .notification(UIApplication.didEnterBackgroundNotification)
+            .subscribe(onNext: {[weak self] _ in
+                self?.loopDispoable?.dispose()
+            }).disposed(by: bag)
+        
     }
     
     private func loadFinishedSignal() -> Observable<Void> {
@@ -173,4 +191,5 @@ public class RefreshButtonViewModel {
     }
     
     private let bag = DisposeBag()
+    private var loopDispoable: Disposable?
 }
