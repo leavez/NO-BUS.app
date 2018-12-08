@@ -1,9 +1,10 @@
-# Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+
+plugin 'cocoapods-static-swift-framework'
+
+platform :ios, '12.0'
+use_frameworks!
 
 target 'NoBus' do
-  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
-  use_frameworks!
   pod "fucking-beijing-bus-api", :git => "https://github.com/leavez/fucking-beijing-bus-api.git", :tag => "1.0.4"
   pod 'RxCocoa'
   pod 'RxDataSources'
@@ -17,7 +18,6 @@ target 'NoBus' do
 
   target 'NoBusTests' do
     inherit! :search_paths
-    # Pods for testing
     pod 'Quick'
     pod 'Nimble'
   end
