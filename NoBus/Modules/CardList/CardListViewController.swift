@@ -39,9 +39,10 @@ class CardListViewController: UIViewController {
             0
         )
         refreshButton
-            .size(60)
+            .width(60)
+            .height(60)
             .centerHorizontally()
-            .bottom(20)
+            .bottom(30)
         
         collectionView.style { (collectionView) in
             collectionView.register(StationCardCell.self, forCellWithReuseIdentifier: "cell")
@@ -110,6 +111,12 @@ class CardListViewController: UIViewController {
                 let naviVC = ManageViewController.embededInNavigationController()
                 self.present(naviVC, animated: true, completion: nil)
         }.disposed(by: bag)
+        
+        collectionView.rx.itemSelected
+            .delay(0.3, scheduler: MainScheduler.instance)
+            .bind {[unowned self] index in
+                self.collectionView.deselectItem(at: index, animated: true)
+            }.disposed(by: bag)
         
         // temp
         collectionView.rx.modelSelected(ItemViewModel.StationCell.self)

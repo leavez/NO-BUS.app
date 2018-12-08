@@ -61,7 +61,7 @@ class RefreshButtonView: UIButton {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.layer.cornerRadius = self.bounds.width / 2
+        self.layer.cornerRadius = min(bounds.width, bounds.height) / 2
     }
     
     
@@ -73,7 +73,7 @@ class RefreshButtonView: UIButton {
         let dot = UIView()
         dot.backgroundColor = UIColor.table.subDescription.withAlphaComponent(0.2)
         v.sv(dot)
-        dot.centerHorizontally().top(1.5).size(width)
+        dot.centerHorizontally().top(15).size(width)
         dot.layer.cornerRadius = width / 2
         return v
     }()
