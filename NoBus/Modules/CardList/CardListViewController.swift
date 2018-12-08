@@ -40,7 +40,8 @@ class CardListViewController: UIViewController {
         )
         refreshButton
             .size(60)
-            .left(15).bottom(20)
+            .centerHorizontally()
+            .bottom(20)
         
         collectionView.style { (collectionView) in
             collectionView.register(StationCardCell.self, forCellWithReuseIdentifier: "cell")
@@ -87,6 +88,7 @@ class CardListViewController: UIViewController {
         
         refreshButton.bind(vm: viewModel.refreshButtonViewModel)
 
+        
     }
     
   
