@@ -13,6 +13,7 @@ target 'NoBus' do
   
   # pod 'MKRingProgressView'
   # pod 'THLabel'
+  pod "ChinaShift", :path => "libs/ChinaShift"
 
   target 'NoBusTests' do
     inherit! :search_paths

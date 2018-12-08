@@ -11,7 +11,7 @@ import CoreLocation
 import RxSwift
 import RxCocoa
 import RxCoreLocation
-
+import ChinaShift
 
 class LocationManager {
     
@@ -30,6 +30,11 @@ class LocationManager {
             }.flatMap { (manager, _) in
                 manager.rx.location
             }
+            .map({ (l) -> CLLocation? in
+                guard let c = l?.coordinate else { return l }
+                let new = transformFromWGSToGCJ(Location(lng: c.longitude, lat: c.latitude))
+                return CLLocation(latitude: new.lat, longitude: new.lng)
+            })
             .replayAll()
         
         _location.connect()
