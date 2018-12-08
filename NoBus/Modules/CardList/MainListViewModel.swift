@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import RxSwift
 import Alamofire
+import CoreLocation
 
 
 class MainListViewModel {
@@ -24,14 +25,17 @@ class MainListViewModel {
         
         
     init() {
-        Observable.merge(
-            // merge multiple triggers
-            StationsManager.shared.allStations.asObserver().anyObservable(),
+        let triggers = Observable.merge(
             refreshTrigger.asObserver().anyObservable(),
             refreshButtonViewModel.output.reloadAction.anyObservable(),
             Observable.just(0 as AnyObject) // the initial trigger
+        ).debug("triggers")
+        
+        Observable.combineLatest(
+                self.stations,
+                triggers
             )
-            .map { _ in try StationsManager.shared.allStations.value() }
+            .map { return $0.0 }
             
             // get the real time data, and bind it to output"
             .do(onNext: {[unowned self] (_) in
@@ -101,6 +105,49 @@ class MainListViewModel {
     }
     
     private let bag = DisposeBag()
+    
+    
+    // MARK:- sorted stations by distance
+    
+    private let stations: Observable<[GeneralStation]> = {
+        
+        func sorting(_ array: [GeneralStation], _ location: CLLocation?) -> [GeneralStation] {
+            guard let location = location else {
+                return array
+            }
+            return array.sorted(by: { (one, another) -> Bool in
+                guard let s1 = one.stationsInLines.first else { return false }
+                guard let s2 = another.stationsInLines.first else { return true }
+                let distances = [s1, s2].map { (s: Station) -> CLLocationDistance in
+                    let c = s.apiObject.location
+                    let cl = CLLocation(latitude: c.latitude, longitude: c.longitude)
+                    return location.distance(from: cl)
+                }
+                return distances[0] < distances[1]
+            })
+        }
+        
+        /// return location within 0.5s or emit a nil then a location.
+        let nonDelayedLocation: Observable<CLLocation?> = {
+            return Observable.merge(
+                LocationManager.shared.location.take(1).debug("location"),
+                Observable<CLLocation?>.just(nil).delay(0.5, scheduler: MainScheduler.instance)
+                ).scan([nil,nil], accumulator: { (sum: [CLLocation?], current: CLLocation?) in
+                    return [sum[1], current]
+                })
+                .takeWhile {
+                    $0[0] == nil
+                }.map { $0[1] }
+        }()
+        
+        /// Return stations sorted by distance to current location
+        /// (There will only one locating action)
+        return nonDelayedLocation.flatMapLatest { location in
+            return StationsManager.shared.allStations.map {
+                sorting($0, location)
+            }
+        }
+    }()
     
 }
 

@@ -66,3 +66,11 @@ struct Spot {
 extension GeneralStation: Codable {}
 extension Spot: Codable {}
 extension Station: Codable {}
+
+extension GeneralStation: Equatable {
+    static func == (lhs: GeneralStation, rhs: GeneralStation) -> Bool {
+        return lhs.name == rhs.name &&
+            lhs.stationsInLines == rhs.stationsInLines
+    }
+}
+

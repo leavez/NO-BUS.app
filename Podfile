@@ -8,6 +8,7 @@ target 'NoBus' do
   pod 'RxCocoa'
   pod 'RxDataSources'
   pod "RxGesture"
+  pod "RxCoreLocation"
   pod 'SteviaLayout'
   
   # pod 'MKRingProgressView'

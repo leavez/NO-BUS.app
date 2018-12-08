@@ -20,6 +20,7 @@
 		3E4991872184C56800BFFBCB /* MainListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E4991862184C56800BFFBCB /* MainListViewModel.swift */; };
 		3E7E6544218566BA00997D9F /* StationCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E7E6543218566BA00997D9F /* StationCardCell.swift */; };
 		3EAD9F8721B995B2005E0F21 /* RxSwift+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAD9F8621B995B2005E0F21 /* RxSwift+extension.swift */; };
+		3EAD9F8921BAE225005E0F21 /* LocateManger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EAD9F8821BAE225005E0F21 /* LocateManger.swift */; };
 		3ECAAD0C2199D90100FD6362 /* ItemViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECAAD0B2199D90100FD6362 /* ItemViewModel.swift */; };
 		3ECAAD0F2199EE4700FD6362 /* Time.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECAAD0E2199EE4700FD6362 /* Time.swift */; };
 		3ECAAD112199EF7200FD6362 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECAAD102199EF7200FD6362 /* Date+extension.swift */; };
@@ -69,6 +70,7 @@
 		3E4991862184C56800BFFBCB /* MainListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainListViewModel.swift; sourceTree = "<group>"; };
 		3E7E6543218566BA00997D9F /* StationCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationCardCell.swift; sourceTree = "<group>"; };
 		3EAD9F8621B995B2005E0F21 /* RxSwift+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RxSwift+extension.swift"; sourceTree = "<group>"; };
+		3EAD9F8821BAE225005E0F21 /* LocateManger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocateManger.swift; sourceTree = "<group>"; };
 		3ECAAD0B2199D90100FD6362 /* ItemViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemViewModel.swift; sourceTree = "<group>"; };
 		3ECAAD0E2199EE4700FD6362 /* Time.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Time.swift; sourceTree = "<group>"; };
 		3ECAAD102199EF7200FD6362 /* Date+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extension.swift"; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 				3E4991822182361300BFFBCB /* DataFetcher.swift */,
 				3ECAAD20219B3B3600FD6362 /* StationSearchManager.swift */,
 				41462578219D6CA6003385F7 /* StationsManager.swift */,
+				3EAD9F8821BAE225005E0F21 /* LocateManger.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -422,6 +425,7 @@
 				"${BUILT_PRODUCTS_DIR}/Differentiator/Differentiator.framework",
 				"${BUILT_PRODUCTS_DIR}/Mappable/Mappable.framework",
 				"${BUILT_PRODUCTS_DIR}/RxCocoa/RxCocoa.framework",
+				"${BUILT_PRODUCTS_DIR}/RxCoreLocation/RxCoreLocation.framework",
 				"${BUILT_PRODUCTS_DIR}/RxDataSources/RxDataSources.framework",
 				"${BUILT_PRODUCTS_DIR}/RxGesture/RxGesture.framework",
 				"${BUILT_PRODUCTS_DIR}/RxSwift/RxSwift.framework",
@@ -434,6 +438,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Differentiator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mappable.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCocoa.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxCoreLocation.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxDataSources.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxGesture.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxSwift.framework",
@@ -473,6 +478,7 @@
 				3E49917F2180E84100BFFBCB /* API+extension.swift in Sources */,
 				3ECAAD0C2199D90100FD6362 /* ItemViewModel.swift in Sources */,
 				3ECAAD0F2199EE4700FD6362 /* Time.swift in Sources */,
+				3EAD9F8921BAE225005E0F21 /* LocateManger.swift in Sources */,
 				412C516A21AAEEE800F6CABC /* RefreshButton.swift in Sources */,
 				3E4991522180C58F00BFFBCB /* CardListViewController.swift in Sources */,
 				3ECAAD1D219B2E3A00FD6362 /* SearchViewModel.swift in Sources */,
