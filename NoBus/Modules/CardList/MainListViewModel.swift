@@ -32,7 +32,7 @@ class MainListViewModel {
         ).debug("triggers")
         
         Observable.combineLatest(
-                self.stations,
+                self.sortedStations,
                 triggers
             )
             .map { return $0.0 }
@@ -71,7 +71,7 @@ class MainListViewModel {
                         return nil
                     }
                     // transfrom status to visiable texts
-                    return ItemViewModel.StationCell.Line(lineNumber: lineStaion.belongedToLine.busNumber, status: status)
+                    return ItemViewModel.StationCell.Line(line: lineStaion.belongedToLine, status: status)
                 })
                 
                 let s = ItemViewModel.StationCell(stationName: generalStation.name, lines: lines)
@@ -109,7 +109,8 @@ class MainListViewModel {
     
     // MARK:- sorted stations by distance
     
-    private let stations: Observable<[GeneralStation]> = {
+    private let sortedStations:
+        Observable<[GeneralStation]> = {
         
         func sorting(_ array: [GeneralStation], _ location: CLLocation?) -> [GeneralStation] {
             guard let location = location else {
@@ -172,6 +173,7 @@ public class RefreshButtonViewModel {
     private let interval: TimeInterval = 10
     
     init() {
+        
         input.isReloading
             // add a grace time
             .flatMapLatest({ reloading -> Observable<Bool> in

@@ -121,7 +121,10 @@ class CardListViewController: UIViewController {
         // temp
         collectionView.rx.modelSelected(ItemViewModel.StationCell.self)
             .filter({ $0.name != SettingCell.settingIdentifier})
-            .bind {[unowned self] _ in
+            .bind {[unowned self] item in
+                let lines = item.lines.value.compactMap{ $0.lineDetail }
+                let mapVC = MapViewController(lines: lines)
+                self.navigationController?.pushViewController(mapVC, animated: true)
             }.disposed(by: bag)
 
     }

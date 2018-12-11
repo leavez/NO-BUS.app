@@ -28,6 +28,10 @@ protocol ColorTable {
     var cardBorderLight: CGColor { get }
     var cardShadowHeavy: CGColor { get }
     
+    
+    // map
+    var busRoute: UIColor { get }
+    var busStop: UIColor { get }
 }
 
 struct LightTheme: ColorTable {
@@ -59,6 +63,13 @@ struct LightTheme: ColorTable {
     var cardShadowHeavy: CGColor {
         return UIColor.darkGray.cgColor
     }
+    
+    var busRoute: UIColor {
+        return UIColor.gray.withAlphaComponent(0.5)
+    }
+    var busStop: UIColor {
+        return self.title.withAlphaComponent(0.8)
+    }
 }
 
 struct DarkTheme: ColorTable {
@@ -89,6 +100,13 @@ struct DarkTheme: ColorTable {
     }
     var cardShadowHeavy: CGColor {
         return UIColor.lightGray.cgColor
+    }
+    
+    var busRoute: UIColor {
+        return UIColor.gray.withAlphaComponent(0.5)
+    }
+    var busStop: UIColor {
+        return UIColor(hexString: "0fa7ff")
     }
 }
 

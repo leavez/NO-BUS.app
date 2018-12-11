@@ -71,6 +71,11 @@ class ManageViewController: UIViewController {
                 self?.tableView.deselectRow(at: index, animated: true)
             }
         }.disposed(by: bag)
+        
+        tableView.rx.modelSelected(Station.self).subscribe(onNext: { model in
+            let vc = MapViewController(lines: [model.belongedToLine])
+            self.navigationController?.pushViewController(vc, animated: true)
+        }).disposed(by: bag)
 
     }
     

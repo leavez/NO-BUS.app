@@ -9,6 +9,7 @@
 import Foundation
 import RxDataSources
 import RxSwift
+import RxCocoa
 
 /// view model for tableview cell
 struct ItemViewModel {
@@ -23,8 +24,11 @@ struct ItemViewModel {
             let timeRemain = BehaviorSubject(value: "")
             let updatedTime = BehaviorSubject(value: "")
             
-            init(lineNumber:String, status:BusStatusForStation) {
-                title.onNext(lineNumber)
+            var lineDetail: LineDetail?
+            
+            init(line:LineDetail, status:BusStatusForStation) {
+                lineDetail = line
+                title.onNext(line.busNumber)
                 distanceRemain.onNext({
                     if status.distanceRemain > 1000 {
                         return String(format: "%0.1f\u{2009}千米", Double(status.distanceRemain)/1000.0)
@@ -48,16 +52,16 @@ struct ItemViewModel {
         }
         
         let name: String
-        let lines: BehaviorSubject<[Line]>
+        let lines: BehaviorRelay<[Line]>
         
         init(stationName:String, lines:[Line]) {
             name = stationName
             if lines.count > 0 {
-                self.lines = BehaviorSubject(value: lines)
+                self.lines = BehaviorRelay(value: lines)
             } else {
                 let placeholder = Line()
                 placeholder.updatedTime.onNext("暂无数据")
-                self.lines = BehaviorSubject(value: [placeholder])
+                self.lines = BehaviorRelay(value: [placeholder])
             }
         }
         

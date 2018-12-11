@@ -28,6 +28,8 @@
 		3ECAAD1D219B2E3A00FD6362 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECAAD1C219B2E3A00FD6362 /* SearchViewModel.swift */; };
 		3ECAAD1F219B313A00FD6362 /* MarginHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECAAD1E219B313A00FD6362 /* MarginHelper.swift */; };
 		3ECAAD21219B3B3600FD6362 /* StationSearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECAAD20219B3B3600FD6362 /* StationSearchManager.swift */; };
+		3EEC580D21BEC12A006DD4AB /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEC580C21BEC12A006DD4AB /* MapViewController.swift */; };
+		3EEC580F21BEC136006DD4AB /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EEC580E21BEC136006DD4AB /* MapViewModel.swift */; };
 		3EF2760821B968960091A620 /* RefreshButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF2760721B968960091A620 /* RefreshButtonView.swift */; };
 		412C516221AA6C6C00F6CABC /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412C516121AA6C6C00F6CABC /* UIColor+Extension.swift */; };
 		412C516421AA6CFF00F6CABC /* ColorTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412C516321AA6CFF00F6CABC /* ColorTable.swift */; };
@@ -78,6 +80,8 @@
 		3ECAAD1C219B2E3A00FD6362 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		3ECAAD1E219B313A00FD6362 /* MarginHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarginHelper.swift; sourceTree = "<group>"; };
 		3ECAAD20219B3B3600FD6362 /* StationSearchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationSearchManager.swift; sourceTree = "<group>"; };
+		3EEC580C21BEC12A006DD4AB /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		3EEC580E21BEC136006DD4AB /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		3EF2760721B968960091A620 /* RefreshButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshButtonView.swift; sourceTree = "<group>"; };
 		412C516121AA6C6C00F6CABC /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		412C516321AA6CFF00F6CABC /* ColorTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTable.swift; sourceTree = "<group>"; };
@@ -212,6 +216,7 @@
 				3ECAAD14219B2C6D00FD6362 /* CardList */,
 				3ECAAD15219B2D8800FD6362 /* Manage */,
 				412C516721AA98F600F6CABC /* Search */,
+				3EEC580B21BEC114006DD4AB /* Map */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -235,6 +240,15 @@
 				416BDC83219F38F4000898C8 /* ManageViewModel.swift */,
 			);
 			path = Manage;
+			sourceTree = "<group>";
+		};
+		3EEC580B21BEC114006DD4AB /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				3EEC580C21BEC12A006DD4AB /* MapViewController.swift */,
+				3EEC580E21BEC136006DD4AB /* MapViewModel.swift */,
+			);
+			path = Map;
 			sourceTree = "<group>";
 		};
 		412C516721AA98F600F6CABC /* Search */ = {
@@ -436,12 +450,14 @@
 				3ECAAD112199EF7200FD6362 /* Date+extension.swift in Sources */,
 				3ECAAD21219B3B3600FD6362 /* StationSearchManager.swift in Sources */,
 				41462579219D6CA6003385F7 /* StationsManager.swift in Sources */,
+				3EEC580D21BEC12A006DD4AB /* MapViewController.swift in Sources */,
 				412C516421AA6CFF00F6CABC /* ColorTable.swift in Sources */,
 				3E4991832182361300BFFBCB /* DataFetcher.swift in Sources */,
 				3E4991732180CA1800BFFBCB /* Stations.swift in Sources */,
 				3E4991502180C58F00BFFBCB /* AppDelegate.swift in Sources */,
 				3EF2760821B968960091A620 /* RefreshButtonView.swift in Sources */,
 				412C516221AA6C6C00F6CABC /* UIColor+Extension.swift in Sources */,
+				3EEC580F21BEC136006DD4AB /* MapViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
