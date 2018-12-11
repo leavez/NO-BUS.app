@@ -34,7 +34,8 @@ class MapViewController: UIViewController {
         
         mapView.delegate = self
         mapView.isPitchEnabled = false
-        
+        mapView.register(Bus.View.self, forAnnotationViewWithReuseIdentifier: Bus.View.identifer)
+
         self.bindViewModel(viewModel)
         self.showLineElementsInMap()
     }
@@ -78,10 +79,21 @@ class MapViewController: UIViewController {
         }).disposed(by: bag)
         
         
-        vm.output.status.subscribe(onNext: { status in
-            
-        }).disposed(by: bag)
-        
+        // real time buses
+        vm.output.status.map {
+            return $0.flatMap { status in
+                status.busStatus.map {
+                    Bus(status: $0, ofLine: status.belongToLine)
+                }
+                } as [Bus]
+            }.scan(([], []), accumulator: { (sum, new) -> (pre:[Bus], current:[Bus]) in
+                return (pre: sum.current, current: new)
+            })
+            .subscribe(onNext: { [unowned self] args in
+                let (pre, current) = args
+                self.mapView.removeAnnotations(pre)
+                self.mapView.addAnnotations(current)
+            }).disposed(by: bag)
         
     }
     
@@ -91,11 +103,10 @@ class MapViewController: UIViewController {
     }
     
     private let bag = DisposeBag()
+
 }
 
-class BusPloyline: MKPolyline {}
-class BusStopOverlay: MKCircle {}
-class BusStopReferencedOverlay: MKCircle {}
+
 
 extension MapViewController: MKMapViewDelegate {
     
@@ -122,4 +133,52 @@ extension MapViewController: MKMapViewDelegate {
             return MKOverlayRenderer(overlay: overlay)
         }
     }
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        switch annotation {
+        case let anno as Bus:
+            let v = mapView.dequeueReusableAnnotationView(withIdentifier: Bus.View.identifer, for: anno) as! Bus.View
+            v.setModel(anno)
+            return v
+        case _:
+            return nil
+        }
+    }
 }
+
+class BusPloyline: MKPolyline {}
+class BusStopOverlay: MKCircle {}
+class BusStopReferencedOverlay: MKCircle {}
+
+class Bus: MKPointAnnotation {
+    
+    let status: BusStatusForStation
+    let ofLine: LineDetail
+    
+    init(status:BusStatusForStation, ofLine:LineDetail) {
+        self.status = status
+        self.ofLine = ofLine
+        super.init()
+        self.coordinate = status.currentLocation.CLCoordinate2D
+    }
+    
+    class View: MKPinAnnotationView {
+        static let identifer = "bus.view.annotaionView"
+        
+        let label = UILabel()
+        
+        required init?(coder aDecoder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+        override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
+            super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
+            self.addSubview(label)
+            label.fillContainer()
+        }
+        
+        func setModel(_ m: Bus) {
+            label.text = m.ofLine.busNumber
+        }
+    }
+}
+

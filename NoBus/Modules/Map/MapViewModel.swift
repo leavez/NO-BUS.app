@@ -15,7 +15,7 @@ import fucking_beijing_bus_api
 class MapViewModel {
     
     struct AllBusPositionInLine {
-        let points: [CLLocationCoordinate2D]
+        let busStatus: [BusStatusForStation]
         let belongToLine: LineDetail
     }
     
@@ -58,7 +58,7 @@ class MapViewModel {
                 (status: [(LineDetail, [BusStatusForStation])]) -> [AllBusPositionInLine] in
                 return status.map { info in
                     AllBusPositionInLine(
-                        points: info.1.map{ $0.currentLocation.CLCoordinate2D },
+                        busStatus: info.1,
                         belongToLine: info.0
                     )
                 }
