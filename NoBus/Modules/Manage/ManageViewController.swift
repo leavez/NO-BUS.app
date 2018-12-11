@@ -73,7 +73,7 @@ class ManageViewController: UIViewController {
         }.disposed(by: bag)
         
         tableView.rx.modelSelected(Station.self).subscribe(onNext: { model in
-            let vc = MapViewController(lines: [model.belongedToLine])
+            let vc = MapViewController(lines: [model.belongedToLine], referenceStation:model.apiObject)
             self.navigationController?.pushViewController(vc, animated: true)
         }).disposed(by: bag)
 

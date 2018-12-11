@@ -23,15 +23,25 @@ class MapViewModel {
     struct Output {
         let status = BehaviorSubject<[AllBusPositionInLine]>(value: [])
         let staticLines = BehaviorSubject<[LineDetail]>(value:[])
+        let center = BehaviorRelay<CLLocationCoordinate2D?>(value: nil)
+        let referenceStation = BehaviorRelay<CLLocationCoordinate2D?>(value:nil)
     }
     let output = Output()
     
     // input
     let refreshTrigger = PublishSubject<Void>()
     
-    init(lines:[LineDetail]) {
+    init(lines:[LineDetail], referenceStation: LineDetail.Station?) {
+        self.referenceStation = referenceStation
         self.lines = lines
+        
+        // static data
         output.staticLines.onNext(lines)
+        let center: CLLocationCoordinate2D? = referenceStation.map { currentStation in
+            currentStation.location.CLCoordinate2D
+        }
+        output.center.accept(center)
+        output.referenceStation.accept(center)
 
         // reduce
         unowned let _self = self
@@ -63,10 +73,12 @@ class MapViewModel {
             .bind(to: refreshTrigger)
             .disposed(by: bag)
         
+        
     }
     
     
-    private var lines: [LineDetail] 
+    private var lines: [LineDetail]
+    private let referenceStation: LineDetail.Station?
     
     private let bag = DisposeBag()
     

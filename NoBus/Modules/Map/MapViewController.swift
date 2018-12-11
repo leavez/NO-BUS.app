@@ -18,8 +18,8 @@ class MapViewController: UIViewController {
     let mapView = MKMapView(frame: .zero)
     let viewModel: MapViewModel
     
-    init(lines: [LineDetail]) {
-        viewModel = MapViewModel(lines: lines)
+    init(lines: [LineDetail], referenceStation: LineDetail.Station? = nil) {
+        viewModel = MapViewModel(lines: lines, referenceStation: referenceStation)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -37,11 +37,11 @@ class MapViewController: UIViewController {
         
         self.bindViewModel(viewModel)
         self.showLineElementsInMap()
-        self.zoomInToCurrentLocation()
     }
     
     func bindViewModel(_ vm: MapViewModel) {
         
+        // draw liens
         vm.output.staticLines
         .subscribe(onNext: {[unowned self] lines in
             for line in lines {
@@ -57,16 +57,18 @@ class MapViewController: UIViewController {
             }
         }).disposed(by: bag)
         
-        vm.output.status.subscribe(onNext: { status in
-            
+        vm.output.referenceStation
+        .subscribe(onNext: {[unowned self] stationCoordinate in
+            if let stationCoordinate = stationCoordinate {
+                let overlay = BusStopReferencedOverlay(center: stationCoordinate, radius: 30)
+                self.mapView.addOverlay(overlay)
+            }
         }).disposed(by: bag)
-    }
-    
-    func zoomInToCurrentLocation() {
         
-        LocationManager.shared.location.subscribe(onNext: {
+        // zoom to properate region
+        vm.output.center.subscribe(onNext: {
             [unowned self] location in
-            if let cor = location?.coordinate {
+            if let cor = location {
                 let region = MKCoordinateRegion(
                     center: cor,
                     latitudinalMeters: 1200,
@@ -74,7 +76,15 @@ class MapViewController: UIViewController {
                 self.mapView.setRegion(region, animated: true)
             }
         }).disposed(by: bag)
+        
+        
+        vm.output.status.subscribe(onNext: { status in
+            
+        }).disposed(by: bag)
+        
+        
     }
+    
     
     func showLineElementsInMap() {
         
@@ -85,6 +95,7 @@ class MapViewController: UIViewController {
 
 class BusPloyline: MKPolyline {}
 class BusStopOverlay: MKCircle {}
+class BusStopReferencedOverlay: MKCircle {}
 
 extension MapViewController: MKMapViewDelegate {
     
@@ -99,6 +110,13 @@ extension MapViewController: MKMapViewDelegate {
         case let o as BusStopOverlay:
             let render = MKCircleRenderer(circle: o)
             render.fillColor = UIColor.table.busStop
+            return render
+        case let o as BusStopReferencedOverlay:
+            let render = MKCircleRenderer(circle: o)
+            render.strokeColor = UIColor.white
+            render.lineWidth = 3
+            render.lineCap = .square
+            render.lineDashPattern = [2,4]
             return render
         default:
             return MKOverlayRenderer(overlay: overlay)
