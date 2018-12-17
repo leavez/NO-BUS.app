@@ -29,18 +29,24 @@ struct ItemViewModel {
             init(line:LineDetail, status:BusStatusForStation) {
                 lineDetail = line
                 title.onNext(line.busNumber)
-                distanceRemain.onNext({
-                    if status.distanceRemain > 1000 {
-                        return String(format: "%0.1f\u{2009}千米", Double(status.distanceRemain)/1000.0)
-                    } else {
-                        return "\(status.distanceRemain)\u{2009}米"
-                    }
-                    }())
-                timeRemain.onNext({
-                    let s = Date(timeIntervalSince1970: status.estimatedArrivedTime)
-                        .furtureDurationDescription
-                    return "预计\u{2009}\(s)"
-                    }())
+                
+                if status.comingStation.distanceRemain == -1 {
+                    distanceRemain.onNext("已到达")
+                } else {
+                    distanceRemain.onNext({
+                        if status.distanceRemain > 1000 {
+                            return String(format: "%0.1f\u{2009}千米", Double(status.distanceRemain)/1000.0)
+                        } else {
+                            return "\(status.distanceRemain)\u{2009}米"
+                        }
+                        }())
+                    timeRemain.onNext({
+                        let s = Date(timeIntervalSince1970: status.estimatedArrivedTime)
+                            .furtureDurationDescription
+                        return "预计\u{2009}\(s)"
+                        }())
+                }
+                
                 updatedTime.onNext({
                     let s = Date(timeIntervalSince1970: status.gpsUpdatedTime)
                         .pastDurationDescription
